@@ -1,41 +1,69 @@
-// Palette inspired by Tomer Dahan Jewelry:
-// handmade men's statement pieces — gemstones (ruby, emerald, sapphire),
-// brushed gold, oxidized silver, against ivory and deep charcoal.
+// Tomer Dahan Jewelry palette — black, gold, burning gemstones.
+// Surfaces are deep black; primary accent is brushed gold; gemstone tones
+// (ruby/emerald/sapphire) appear as vivid call-outs.
 export const colors = {
-  // Surfaces
-  ivory: '#F5F0E6',
-  cream: '#EDE5D3',
-  parchment: '#FAF7F2',
-  charcoal: '#1A1714',
-  obsidian: '#0E0C0A',
-  smoke: '#3A332C',
+  // Surfaces (dark)
+  black: '#000000',
+  ink: '#0A0908',
+  jet: '#13100E',
+  char: '#1C1815',
+  slate: '#2A241F',
 
   // Brand metals
-  gold: '#B8893E',
-  goldLight: '#D4AB66',
-  goldDeep: '#8C6322',
-  silver: '#A9A29B',
+  gold: '#D4AF37',
+  goldBright: '#F0C94A',
+  goldDeep: '#B8893E',
+  goldDark: '#8B6919',
+  silver: '#C8C2BB',
 
-  // Gemstone accents
-  ruby: '#7A1F2A',
-  emerald: '#1F5C46',
-  sapphire: '#1E3A5F',
-  onyx: '#181410',
+  // Light surfaces (used sparingly, e.g. on gold buttons)
+  ivory: '#F5EFE0',
+  bone: '#E9DFC9',
 
-  // UI
-  textPrimary: '#1A1714',
-  textSecondary: '#6B5F52',
-  textMuted: '#9A8E81',
-  textOnDark: '#F5F0E6',
-  border: '#D9CFBE',
-  borderDark: '#2B2520',
-  divider: '#E5DCC9',
+  // Gemstones — vivid
+  ruby: '#C8102E',
+  rubyDeep: '#8B0A20',
+  emerald: '#0F8B5C',
+  emeraldDeep: '#075235',
+  sapphire: '#0A4DA6',
+  sapphireDeep: '#06316B',
+  onyx: '#0A0908',
+  tigerEye: '#B8763D',
+  turquoise: '#1B9E9E',
+  pearl: '#E9DFC9',
+  lapis: '#143A82',
+  garnet: '#7A1E2C',
+  agate: '#6B4226',
+
+  // Text on dark
+  textPrimary: '#F5EFE0',
+  textSecondary: '#B8AC9A',
+  textMuted: '#897868',
+  textGold: '#D4AF37',
+  textOnGold: '#0A0908',
+
+  // Lines
+  border: '#2A241F',
+  borderSoft: '#1A1612',
+  borderGold: 'rgba(212,175,55,0.35)',
+  divider: '#1A1612',
 
   // Status
-  success: '#1F5C46',
-  error: '#7A1F2A',
-  overlay: 'rgba(14, 12, 10, 0.55)',
-  scrim: 'rgba(14, 12, 10, 0.85)',
+  success: '#0F8B5C',
+  error: '#C8102E',
+  whatsapp: '#25D366',
+  overlay: 'rgba(0, 0, 0, 0.65)',
+  scrim: 'rgba(0, 0, 0, 0.92)',
+
+  // Aliases kept for backward compatibility with components
+  // that still reference the old token names.
+  parchment: '#0A0908',   // was #FAF7F2 — now dark
+  cream: '#13100E',       // was #EDE5D3 — now dark surface
+  charcoal: '#F5EFE0',    // was #1A1714 — now used as on-dark text color
+  obsidian: '#000000',
+  smoke: '#2A241F',
+  textOnDark: '#F5EFE0',
+  borderDark: '#2A241F',
 };
 
 export type Colors = typeof colors;

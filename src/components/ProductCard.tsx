@@ -88,7 +88,7 @@ export function ProductCard({ product, width, large }: Props) {
               />
             ))}
           </View>
-          <Text style={[typography.price, { color: colors.charcoal }]}>
+          <Text style={[typography.price, { color: colors.gold }]}>
             {formatPrice(product.priceUSD, locale)}
           </Text>
         </View>

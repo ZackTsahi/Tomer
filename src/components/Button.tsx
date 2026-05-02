@@ -93,32 +93,35 @@ const variantStyles: Record<
   Variant,
   { container: ViewStyle; label: { color: string } }
 > = {
+  // Primary CTA: brushed gold on black.
   primary: {
     container: {
-      backgroundColor: colors.charcoal,
+      backgroundColor: colors.gold,
       borderWidth: 1,
-      borderColor: colors.charcoal,
+      borderColor: colors.goldDeep,
     },
-    label: { color: colors.parchment },
+    label: { color: colors.ink },
   },
+  // Secondary: gold outline, gold text — used for non-destructive actions.
   secondary: {
     container: {
       backgroundColor: 'transparent',
       borderWidth: 1,
-      borderColor: colors.charcoal,
+      borderColor: colors.gold,
     },
-    label: { color: colors.charcoal },
+    label: { color: colors.gold },
   },
   ghost: {
     container: { backgroundColor: 'transparent' },
-    label: { color: colors.charcoal },
+    label: { color: colors.gold },
   },
+  // Alias kept for screens that explicitly request gold; same as primary.
   gold: {
     container: {
       backgroundColor: colors.gold,
       borderWidth: 1,
-      borderColor: colors.gold,
+      borderColor: colors.goldDeep,
     },
-    label: { color: colors.parchment },
+    label: { color: colors.ink },
   },
 };

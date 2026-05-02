@@ -285,8 +285,10 @@ const styles = StyleSheet.create({
   bespoke: {
     marginTop: spacing.xxxl,
     marginHorizontal: spacing.base,
-    backgroundColor: colors.charcoal,
+    backgroundColor: colors.jet,
+    borderWidth: 1,
+    borderColor: colors.gold,
     padding: spacing.xl,
-    borderRadius: 16,
+    borderRadius: 4,
   },
 });
