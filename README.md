@@ -53,27 +53,37 @@ src/
 
 ## Getting started
 
+You need [Node.js 18+](https://nodejs.org/) installed.
+
 ```sh
 npm install
-# Add the five TTF font files into assets/fonts/ (see assets/fonts/README.md)
-# Add icon.png, splash.png, adaptive-icon.png, favicon.png into assets/
 npx expo start
 ```
 
-Press `i` for iOS Simulator or `a` for Android.
+Then either:
+
+- **On your phone (easiest):** install [Expo Go](https://expo.dev/go) (App
+  Store / Play Store), make sure your phone is on the same Wi-Fi as your
+  computer, and scan the QR code shown in the terminal.
+- **iOS Simulator** (macOS only, needs Xcode): press `i` in the terminal.
+- **Android Emulator** (needs Android Studio): press `a`.
+- **Web preview:** press `w`.
+
+Fonts (Playfair Display + Inter) are loaded automatically from
+`@expo-google-fonts/*` — no manual setup needed.
 
 ## Before shipping
 
 1. **Replace product imagery.** `src/data/products.ts` uses Unsplash
    placeholders. Swap in the studio's own photography (CDN or local imports).
-2. **Verify contact details.** Update `whatsappNumber` in `src/data/contact.ts`
-   with the studio's actual E.164 number — the rest is filled from public info.
-3. **Replace mock catalog** with the studio's real SKUs, prices, lengths and
+2. **Replace mock catalog** with the studio's real SKUs, prices, lengths and
    descriptions in EN + HE.
+3. **Add brand assets** (`assets/icon.png`, `splash.png`, `adaptive-icon.png`,
+   `favicon.png`) and re-add the references in `app.json`.
 4. **Live FX**, taxes, shipping. Pricing currently shows USD or an approximate
    ILS conversion in `src/utils/format.ts`.
 5. **Persist cart & wishlist.** The contexts are in-memory only; wire to
    `AsyncStorage` or a backend before launch.
-6. **Hook up checkout.** Today's "checkout" composes a WhatsApp message; this
-   matches how the brand currently transacts. To accept cards in-app, integrate
-   Stripe or a Shopify storefront.
+6. **Hook up checkout.** Today's "checkout" composes a WhatsApp message to
+   `+972-54-8167131`; this matches how the brand currently transacts. To
+   accept cards in-app, integrate Stripe or a Shopify storefront.
