@@ -72,6 +72,25 @@ Then either:
 Fonts (Playfair Display + Inter) are loaded automatically from
 `@expo-google-fonts/*` — no manual setup needed.
 
+## Build an Android APK
+
+The repo is configured for [EAS Build](https://docs.expo.dev/build/introduction/)
+so you can produce a downloadable APK from the cloud — no Android SDK needed.
+
+```sh
+npm install -g eas-cli           # one time
+eas login                        # uses your free Expo account
+eas build --platform android --profile preview
+```
+
+When the build finishes (~10–15 min), the CLI prints a URL where the APK can
+be downloaded and installed on any Android device. The `preview` profile in
+`eas.json` is configured to produce an APK (rather than an AAB) so it can be
+sideloaded directly.
+
+For a Play Store upload, use the `production` profile instead, which builds
+an `.aab`.
+
 ## Before shipping
 
 1. **Replace product imagery.** `src/data/products.ts` uses Unsplash
