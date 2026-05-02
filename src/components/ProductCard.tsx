@@ -9,6 +9,7 @@ import { stoneMeta } from '@/data/stones';
 import { useSaved } from '@/state/SavedContext';
 import { useI18n } from '@/i18n/I18nProvider';
 import { formatPrice } from '@/utils/format';
+import { imageSource } from '@/utils/image';
 import { colors, radius, spacing, typography } from '@/theme';
 
 type Props = {
@@ -38,7 +39,7 @@ export function ProductCard({ product, width, large }: Props) {
     >
       <View style={[styles.imageWrap, large && styles.imageWrapLarge]}>
         <Image
-          source={{ uri: product.image }}
+          source={imageSource(product.image)}
           style={styles.image}
           contentFit="cover"
           transition={250}

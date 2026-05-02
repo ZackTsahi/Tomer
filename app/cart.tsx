@@ -17,6 +17,7 @@ import { useI18n, useT } from '@/i18n/I18nProvider';
 import { getProductById } from '@/data/products';
 import { whatsappLink } from '@/data/contact';
 import { formatPrice } from '@/utils/format';
+import { imageSource } from '@/utils/image';
 import { colors, radius, spacing, typography } from '@/theme';
 
 export default function CartScreen() {
@@ -84,7 +85,7 @@ export default function CartScreen() {
             {lines.map((l) => (
               <View key={l.productId} style={styles.line}>
                 <Image
-                  source={{ uri: l.product.image }}
+                  source={imageSource(l.product.image)}
                   style={styles.lineImage}
                   contentFit="cover"
                 />

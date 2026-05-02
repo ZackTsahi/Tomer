@@ -6,6 +6,7 @@ import { useRouter } from 'expo-router';
 import type { Category } from '@/types/product';
 import { categoryMeta } from '@/data/categories';
 import { useI18n } from '@/i18n/I18nProvider';
+import { imageSource } from '@/utils/image';
 import { colors, radius, spacing, typography } from '@/theme';
 
 type Props = {
@@ -32,7 +33,7 @@ export function CategoryCard({ category, width }: Props) {
         pressed && { opacity: 0.92 },
       ]}
     >
-      <Image source={{ uri: meta.image }} style={styles.image} contentFit="cover" />
+      <Image source={imageSource(meta.image as string | number)} style={styles.image} contentFit="cover" />
       <LinearGradient
         colors={['transparent', 'rgba(14,12,10,0.7)']}
         style={StyleSheet.absoluteFill}

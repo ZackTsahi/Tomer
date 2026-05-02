@@ -6,7 +6,7 @@ export type Locale = 'en' | 'he';
 export const strings = {
   en: {
     brand: 'Tomer Dahan',
-    tagline: 'Handcrafted statement jewelry',
+    tagline: 'Custom Handmade Jewelry Designer',
     nav: {
       home: 'Home',
       shop: 'Shop',
@@ -108,7 +108,7 @@ export const strings = {
 
   he: {
     brand: 'תומר דהן',
-    tagline: 'תכשיטי סטייטמנט בעבודת יד',
+    tagline: 'מעצב תכשיטים בעבודת יד · בהזמנה אישית',
     nav: {
       home: 'בית',
       shop: 'חנות',

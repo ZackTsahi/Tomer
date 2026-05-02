@@ -1,8 +1,11 @@
 export type Stone =
+  | 'diamond'
   | 'ruby'
   | 'emerald'
   | 'sapphire'
   | 'onyx'
+  | 'pinkTourmaline'
+  | 'peridot'
   | 'tigerEye'
   | 'turquoise'
   | 'pearl'
@@ -11,11 +14,13 @@ export type Stone =
   | 'agate';
 
 export type Category =
-  | 'mala'
+  | 'engagement'
+  | 'ring'
+  | 'magenDavid'
+  | 'hamsa'
+  | 'pendant'
   | 'necklace'
   | 'bracelet'
-  | 'ring'
-  | 'pendant'
   | 'earring';
 
 export type Metal = 'gold14k' | 'gold18k' | 'silver925' | 'oxidizedSilver' | 'mixed';
@@ -30,10 +35,13 @@ export type Product = {
   metal: Metal;
   /** Price in USD; we display in user's selected currency at render time. */
   priceUSD: number;
-  /** Single hero image (remote URL). Replace with the studio's real assets. */
-  image: string;
-  /** Additional gallery images. */
-  gallery?: string[];
+  /**
+   * Hero image — either a remote URL string or a local `require(...)` module
+   * id (which is a number at runtime). Components resolve at render time.
+   */
+  image: string | number;
+  /** Additional gallery images, same dual-format. */
+  gallery?: Array<string | number>;
   description: string;
   descriptionHe?: string;
   lengthCm?: number;

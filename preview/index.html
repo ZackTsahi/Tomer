@@ -6,44 +6,22 @@
 <title>Tomer Dahan Jewelry — App Preview</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --black:#000000;
-  --ink:#0A0908;
-  --jet:#13100E;
-  --char:#1C1815;
-  --slate:#2A241F;
-
-  --gold:#D4AF37;
-  --goldBright:#F0C94A;
-  --goldDeep:#B8893E;
-  --goldDark:#8B6919;
-
-  --ivory:#F5EFE0;
-  --bone:#E9DFC9;
-
-  --ruby:#C8102E;
-  --rubyDeep:#8B0A20;
-  --emerald:#0F8B5C;
-  --emeraldDeep:#075235;
-  --sapphire:#0A4DA6;
-  --sapphireDeep:#06316B;
-  --onyx:#0A0908;
-  --tigerEye:#B8763D;
-  --turquoise:#1B9E9E;
-  --pearl:#E9DFC9;
-  --lapis:#143A82;
-  --garnet:#7A1E2C;
-  --agate:#6B4226;
-
-  --line:#2A241F;
-  --lineSoft:#1A1612;
-  --muted:#897868;
+  --black:#000000; --ink:#0A0908; --jet:#13100E; --char:#1C1815; --slate:#2A241F;
+  --gold:#D4AF37; --goldBright:#F0C94A; --goldDeep:#B8893E; --goldDark:#8B6919;
+  --ivory:#F5EFE0; --bone:#E9DFC9;
+  --ruby:#C8102E; --rubyDeep:#8B0A20;
+  --emerald:#0F8B5C; --emeraldDeep:#075235;
+  --sapphire:#0A4DA6; --sapphireDeep:#06316B;
+  --onyx:#0A0908; --pinkTourm:#D85C8A; --peridot:#9BC848;
+  --diamond:#E8E8EA; --tigerEye:#B8763D; --turquoise:#1B9E9E;
+  --pearl:#E9DFC9; --lapis:#143A82; --garnet:#7A1E2C;
+  --line:#2A241F; --lineSoft:#1A1612; --muted:#897868;
+  --whatsapp:#25D366;
 }
-
 * { box-sizing: border-box; margin:0; padding:0; -webkit-font-smoothing: antialiased; }
-
 body {
   background: radial-gradient(ellipse at top, #1a1612 0%, #000 60%);
   font-family: 'Inter', system-ui, sans-serif;
@@ -53,16 +31,11 @@ body {
 }
 
 /* INTRO */
-.intro {
-  max-width: 880px;
-  margin: 0 auto 56px;
-  text-align: center;
-}
+.intro { max-width: 920px; margin: 0 auto 56px; text-align: center; }
 .intro .eyebrow {
   display: inline-flex; align-items: center; gap: 12px;
   font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-  color: var(--gold); font-weight: 600;
-  margin-bottom: 20px;
+  color: var(--gold); font-weight: 600; margin-bottom: 20px;
 }
 .intro .eyebrow::before, .intro .eyebrow::after {
   content:''; width: 36px; height: 1px;
@@ -70,52 +43,33 @@ body {
 }
 .intro h1 {
   font-family: 'Cormorant Garamond', serif;
-  font-weight: 500; font-size: 56px; line-height: 1.05;
-  letter-spacing: -1px;
+  font-weight: 500; font-size: 56px; line-height: 1.05; letter-spacing: -1px;
   background: linear-gradient(180deg, var(--ivory) 0%, var(--gold) 130%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
 }
-.intro p {
-  margin-top: 16px; opacity: 0.6; font-size: 14px; line-height: 1.6;
-  max-width: 540px; margin-left: auto; margin-right: auto;
-}
+.intro p { margin-top: 16px; opacity: 0.6; font-size: 14px; line-height: 1.6; max-width: 580px; margin-left: auto; margin-right: auto; }
 
 /* GRID */
 .grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 48px;
-  justify-content: center;
-  align-items: flex-start;
-  max-width: 1500px;
-  margin: 0 auto;
+  display: flex; flex-wrap: wrap; gap: 48px;
+  justify-content: center; align-items: flex-start;
+  max-width: 1500px; margin: 0 auto;
 }
 
-/* PHONE FRAME */
-.phone-wrap {
-  display: flex; flex-direction: column; align-items: center; gap: 16px;
-}
+/* PHONE */
+.phone-wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; }
 .phone-label {
   font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
   color: var(--gold); font-weight: 600;
   padding: 6px 14px; border: 1px solid var(--gold); border-radius: 999px;
 }
 .phone {
-  width: 380px;
-  height: 820px;
+  width: 380px; height: 820px;
   background: var(--ink);
   border-radius: 52px;
   border: 10px solid #050403;
-  box-shadow:
-    0 40px 80px rgba(0,0,0,0.6),
-    0 0 0 1px rgba(212,175,55,0.12) inset,
-    0 0 60px rgba(212,175,55,0.06);
-  overflow: hidden;
-  position: relative;
-  color: var(--ivory);
-  font-size: 14px;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,175,55,0.12) inset, 0 0 60px rgba(212,175,55,0.06);
+  overflow: hidden; position: relative; color: var(--ivory); font-size: 14px;
 }
 .phone::before {
   content: ''; position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
@@ -124,33 +78,23 @@ body {
 .statusbar {
   height: 50px; padding: 0 26px;
   display:flex; align-items:flex-end; justify-content: space-between;
-  font-size: 12px; font-weight: 600; padding-bottom: 6px;
-  position: relative; z-index: 50;
+  font-size: 12px; font-weight: 600; padding-bottom: 6px; position: relative; z-index: 50;
   color: var(--ivory);
 }
-.screen {
-  height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch;
-  background: var(--ink);
-}
+.screen { height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--ink); }
 .screen::-webkit-scrollbar { display: none; }
 
 /* TAB BAR */
 .tabbar {
   position:absolute; left:0; right:0; bottom:0;
   background: rgba(10,9,8,0.92);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
   border-top: 1px solid rgba(212,175,55,0.18);
   display:flex; justify-content: space-around; align-items: center;
-  padding: 12px 4px 32px;
-  z-index: 40;
+  padding: 12px 4px 32px; z-index: 40;
 }
-.tabbar .tab {
-  display:flex; flex-direction:column; align-items:center; gap:5px; flex:1;
-}
-.tabbar .tab-icon {
-  font-size: 16px; color: var(--muted);
-}
+.tabbar .tab { display:flex; flex-direction:column; align-items:center; gap:5px; flex:1; }
+.tabbar .tab-icon { font-size: 16px; color: var(--muted); }
 .tabbar .tab.active .tab-icon { color: var(--gold); }
 .tabbar .tab-label {
   font-size: 9px; letter-spacing: 1.4px; text-transform: uppercase;
@@ -158,7 +102,7 @@ body {
 }
 .tabbar .tab.active .tab-label { color: var(--gold); }
 
-/* TYPOGRAPHY */
+/* TYPOGRAPHY HELPERS */
 .eyebrow {
   font-size: 10px; letter-spacing: 2.4px; text-transform: uppercase;
   font-weight: 600; display:flex; align-items:center; gap: 10px;
@@ -168,61 +112,69 @@ body {
   content:''; width:28px; height:1px;
   background: linear-gradient(90deg, transparent, var(--gold));
 }
-.eyebrow.center { justify-content: center; }
-.eyebrow.center::before {
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  width: 60px;
-}
-
 .serif { font-family: 'Cormorant Garamond', serif; }
 
-/* HERO */
-.hero {
-  height: 620px;
+/* ============ T-D LOGO ============ */
+.td-logo {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.td-monogram {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--ink);
+  border: 1.5px solid var(--gold);
+  display:flex; align-items:center; justify-content:center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 38px; font-weight: 600;
+  color: var(--gold);
   position: relative;
-  overflow: hidden;
+  box-shadow: 0 0 0 4px var(--ink), 0 0 0 5px rgba(212,175,55,0.4);
+}
+.td-monogram::before, .td-monogram::after {
+  content:''; position: absolute; left: 50%; transform: translateX(-50%);
+  width: 36px; height: 1px; background: var(--gold);
+}
+.td-monogram::before { top: 8px; }
+.td-monogram::after { bottom: 8px; }
+.td-name {
+  font-family: 'Cinzel', serif;
+  font-size: 14px; font-weight: 500;
+  color: var(--gold); letter-spacing: 4px;
+}
+.td-tag {
+  font-size: 8px; letter-spacing: 2.5px; color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* ============ HERO ============ */
+.hero {
+  height: 640px; position: relative; overflow: hidden;
 }
 .hero-img {
   position: absolute; inset: 0;
-  background: #000 url('https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=1000&q=90') center/cover;
-  filter: brightness(0.55) saturate(1.2) contrast(1.1);
+  background: #000 url('../assets/instagram/ig-grid-04.jpg') center/cover;
+  filter: brightness(0.45) saturate(1.15) contrast(1.1);
 }
 .hero::after {
   content:''; position:absolute; inset:0;
   background:
-    radial-gradient(ellipse at 50% 30%, transparent 0%, rgba(0,0,0,0.4) 60%),
-    linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.95) 100%);
+    radial-gradient(ellipse at 50% 30%, transparent 0%, rgba(0,0,0,0.5) 70%),
+    linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.95) 100%);
 }
 .hero-content {
-  position:relative; z-index:2;
-  height:100%; display:flex; flex-direction:column;
+  position:relative; z-index:2; height:100%;
+  display:flex; flex-direction:column;
   padding: 62px 24px 36px;
 }
 .hero-top {
   display:flex; justify-content:space-between; align-items:center;
   margin-bottom: auto;
 }
-.brand-mark {
-  display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
-}
-.brand-mark .td-mono {
-  font-family: 'Cormorant Garamond', serif; font-weight: 600;
-  font-size: 24px; line-height: 1;
-  color: var(--gold);
-  letter-spacing: 4px;
-}
-.brand-mark .td-sub {
-  font-size: 8px; letter-spacing: 3.5px; color: var(--ivory);
-  opacity: 0.7; text-transform: uppercase;
-}
 .bag-btn {
   width: 40px; height: 40px; border-radius: 20px;
   border: 1px solid rgba(212,175,55,0.4);
   background: rgba(0,0,0,0.4);
   display:flex; align-items:center; justify-content:center;
-  color: var(--gold);
-  position: relative;
-  font-size: 16px;
+  color: var(--gold); position: relative; font-size: 16px;
 }
 .bag-badge {
   position:absolute; top:-4px; right:-4px;
@@ -234,16 +186,13 @@ body {
 }
 .hero-title {
   font-family: 'Cormorant Garamond', serif;
-  font-weight: 500; font-size: 64px; line-height: 0.96;
+  font-weight: 500; font-size: 60px; line-height: 0.96;
   color: var(--ivory); letter-spacing: -1.5px;
-  margin: 24px 0 16px;
-  white-space: pre-line;
+  margin: 24px 0 16px; white-space: pre-line;
 }
 .hero-title .gold {
   background: linear-gradient(180deg, var(--goldBright) 0%, var(--gold) 60%, var(--goldDeep) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
   font-style: italic;
 }
 .hero-rule {
@@ -251,20 +200,14 @@ body {
   background: linear-gradient(90deg, var(--gold), transparent);
   margin: 16px 0;
 }
-.hero-sub {
-  color: var(--ivory); opacity: 0.78; font-size: 14px; line-height: 1.6;
-  max-width: 290px;
-  font-weight: 400;
-}
+.hero-sub { color: var(--ivory); opacity: 0.8; font-size: 14px; line-height: 1.6; max-width: 290px; }
 
-/* BUTTONS */
+/* ============ BUTTONS ============ */
 .btn {
   display:inline-flex; align-items:center; justify-content:center; gap: 10px;
   padding: 16px 28px; font-size: 11px; font-weight: 700;
   letter-spacing: 2.2px; text-transform: uppercase;
   border-radius: 2px; border: 1px solid transparent;
-  cursor: pointer; user-select:none;
-  position: relative;
   font-family: 'Inter', sans-serif;
 }
 .btn-gold {
@@ -273,43 +216,32 @@ body {
   box-shadow: 0 8px 24px rgba(212,175,55,0.25), 0 0 0 1px rgba(0,0,0,0.1) inset;
 }
 .btn-ghost-gold {
-  background: transparent; color: var(--gold);
-  border: 1px solid var(--gold);
+  background: transparent; color: var(--gold); border: 1px solid var(--gold);
 }
 .btn-block { display:flex; width:100%; }
-.hero-cta { margin-top: 24px; align-self: flex-start; }
 
-/* SECTIONS */
-.section {
-  padding: 40px 20px;
-  border-bottom: 1px solid var(--lineSoft);
-}
+/* ============ SECTIONS ============ */
+.section { padding: 40px 20px; border-bottom: 1px solid var(--lineSoft); }
 .section-title {
   font-family: 'Cormorant Garamond', serif;
   font-size: 34px; line-height: 1.1; color: var(--ivory);
-  margin-top: 12px;
-  font-weight: 500;
-  letter-spacing: -0.5px;
+  margin-top: 12px; font-weight: 500; letter-spacing: -0.5px;
 }
-.section-title .accent {
-  color: var(--gold); font-style: italic;
-}
+.section-title .accent { color: var(--gold); font-style: italic; }
 .section-head { margin-bottom: 24px; }
 
-/* H-SCROLL */
+/* ============ H-SCROLL ============ */
 .hscroll {
   display:flex; gap: 14px; overflow-x: auto;
-  margin: 0 -20px; padding: 0 20px;
-  scrollbar-width: none;
+  margin: 0 -20px; padding: 0 20px; scrollbar-width: none;
 }
 .hscroll::-webkit-scrollbar { display:none; }
 
-/* PRODUCT CARD (DARK) */
+/* ============ PRODUCT CARD ============ */
 .card { width: 168px; flex-shrink: 0; }
 .card-image {
   aspect-ratio: 0.82; border-radius: 4px;
-  background: var(--jet);
-  background-size: cover; background-position: center;
+  background: var(--jet); background-size: cover; background-position: center;
   position: relative; overflow: hidden;
   border: 1px solid var(--line);
 }
@@ -330,15 +262,13 @@ body {
   position:absolute; bottom:10px; left:10px;
   background: var(--gold); color: var(--ink);
   font-size: 9px; letter-spacing: 1.6px; font-weight: 700;
-  padding: 5px 10px; border-radius: 2px;
-  z-index: 2;
+  padding: 5px 10px; border-radius: 2px; z-index: 2;
 }
 .card-body { padding-top: 12px; }
 .card-name {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 17px; font-weight: 500; color: var(--ivory);
-  line-height: 1.25;
-  letter-spacing: 0.2px;
+  font-size: 16px; font-weight: 500; color: var(--ivory);
+  line-height: 1.25; letter-spacing: 0.2px;
 }
 .card-meta {
   display:flex; justify-content: space-between; align-items: center; margin-top: 8px;
@@ -349,37 +279,33 @@ body {
   border: 0.5px solid rgba(212,175,55,0.4);
   box-shadow: 0 0 6px rgba(0,0,0,0.5);
 }
-.card-price {
-  font-size: 13px; font-weight: 600; color: var(--gold);
-  letter-spacing: 0.5px;
-}
+.card-price { font-size: 13px; font-weight: 600; color: var(--gold); letter-spacing: 0.5px; }
 
-/* CATEGORY CARD */
+/* ============ CATEGORY CARD ============ */
 .cat-card {
-  width: 170px; flex-shrink: 0;
-  aspect-ratio: 0.78; border-radius: 4px;
-  background-size: cover; background-position: center;
+  width: 170px; flex-shrink: 0; aspect-ratio: 0.78;
+  border-radius: 4px; background-size: cover; background-position: center;
   position:relative; overflow:hidden;
   display:flex; align-items:flex-end; padding: 16px;
-  color: var(--ivory);
-  border: 1px solid var(--line);
+  color: var(--ivory); border: 1px solid var(--line);
 }
-.cat-card::before {
-  content:''; position:absolute; inset:0;
-  background: rgba(0,0,0,0.25);
-}
+.cat-card::before { content:''; position:absolute; inset:0; background: rgba(0,0,0,0.3); }
 .cat-card::after {
   content:''; position:absolute; inset:0;
-  background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.85) 100%);
+  background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.9) 100%);
 }
 .cat-card .label {
   position:relative; z-index:2;
   font-family: 'Cormorant Garamond', serif;
-  font-size: 26px; font-weight: 500;
+  font-size: 24px; font-weight: 500; line-height: 1.1;
 }
-.cat-card .label .accent { color: var(--gold); font-style: italic; font-size: 14px; display: block; margin-top: 2px; letter-spacing: 2px; text-transform: uppercase; font-style: normal; font-family: 'Inter'; font-weight: 600; }
+.cat-card .label .count {
+  display: block; margin-top: 4px;
+  font-family: 'Inter'; font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; font-weight: 600; color: var(--gold);
+}
 
-/* STONE PILL (DARK) */
+/* ============ STONE PILLS ============ */
 .stone-row { display:flex; flex-wrap: wrap; gap: 8px; }
 .stone-pill {
   display:flex; align-items:center; gap:9px;
@@ -399,49 +325,43 @@ body {
   box-shadow: 0 0 8px rgba(0,0,0,0.6), inset 0 0 4px rgba(255,255,255,0.15);
 }
 
-/* BESPOKE BLOCK */
+/* ============ FEED MOSAIC (signature element) ============ */
+.feed-mosaic {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 2px; margin: 0 -20px;
+}
+.feed-cell {
+  aspect-ratio: 1;
+  background-size: cover; background-position: center;
+}
+
+/* ============ BESPOKE ============ */
 .bespoke {
   margin: 8px 16px;
-  background:
-    linear-gradient(135deg, rgba(212,175,55,0.08) 0%, transparent 50%),
-    var(--jet);
+  background: linear-gradient(135deg, rgba(212,175,55,0.1) 0%, transparent 50%), var(--jet);
   border: 1px solid var(--line);
-  padding: 32px 24px;
-  border-radius: 4px;
-  position: relative;
-  overflow: hidden;
+  padding: 32px 24px; border-radius: 4px;
+  position: relative; overflow: hidden;
 }
 .bespoke::before {
   content:''; position:absolute; top:0; left:0; right:0; height: 1px;
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
 }
-.bespoke .eyebrow { color: var(--gold); }
+.bespoke::after {
+  content:''; position:absolute; bottom:0; left:0; right:0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
 .bespoke h2 {
   font-family: 'Cormorant Garamond', serif;
   font-size: 42px; font-weight: 500; line-height: 1.05;
-  margin-top: 12px; color: var(--ivory);
-  letter-spacing: -0.5px;
+  margin-top: 12px; color: var(--ivory); letter-spacing: -0.5px;
 }
-.bespoke h2 .gold {
-  color: var(--gold); font-style: italic;
-}
-.bespoke p { margin-top: 14px; font-size: 13px; opacity: 0.75; line-height: 1.65; color: var(--ivory); }
+.bespoke h2 .gold { color: var(--gold); font-style: italic; }
+.bespoke p { margin-top: 14px; font-size: 13px; opacity: 0.78; line-height: 1.65; color: var(--ivory); }
 .bespoke .btn { margin-top: 24px; }
 
-/* STORY */
-.story p { margin-top: 14px; color: var(--ivory); opacity: 0.7; font-size: 13px; line-height: 1.7; }
-.story .more {
-  margin-top: 20px;
-  font-size: 11px; font-weight: 700; letter-spacing: 2.2px; text-transform: uppercase;
-  color: var(--gold);
-  display: inline-flex; align-items: center; gap: 8px;
-}
-
-/* SHOP */
-.shop-header {
-  display:flex; justify-content: space-between; align-items: flex-end;
-  padding: 20px 20px 12px;
-}
+/* ============ SHOP ============ */
+.shop-header { display:flex; justify-content: space-between; align-items: flex-end; padding: 20px 20px 12px; }
 .shop-title {
   font-family: 'Cormorant Garamond', serif;
   font-size: 38px; color: var(--ivory); margin-top: 6px; font-weight: 500;
@@ -475,7 +395,7 @@ body {
   padding: 16px 20px 100px;
 }
 
-/* PRODUCT DETAIL */
+/* ============ PRODUCT DETAIL ============ */
 .pd-gallery {
   width:100%; aspect-ratio: 1/1.15; background: var(--jet);
   background-size: cover; background-position: center;
@@ -519,18 +439,13 @@ body {
 .pd-name .accent { color: var(--gold); font-style: italic; }
 .pd-price-row {
   display: flex; align-items: baseline; gap: 12px; margin-top: 12px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid var(--line);
+  padding-bottom: 24px; border-bottom: 1px solid var(--line);
 }
 .pd-price {
   font-size: 22px; font-weight: 600; color: var(--gold);
-  letter-spacing: 0.5px;
-  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: 0.5px; font-family: 'Cormorant Garamond', serif;
 }
-.pd-desc {
-  color: var(--ivory); opacity: 0.78;
-  margin-top: 24px; line-height: 1.7; font-size: 14px;
-}
+.pd-desc { color: var(--ivory); opacity: 0.78; margin-top: 24px; line-height: 1.7; font-size: 14px; }
 .pd-specs {
   margin-top: 28px; padding-top: 24px;
   border-top: 1px solid var(--line);
@@ -556,27 +471,24 @@ body {
   position:absolute; left:0; right:0; bottom:0;
   background: linear-gradient(180deg, transparent 0%, var(--ink) 30%);
   padding: 16px 20px 30px;
-  display:flex; gap: 10px; align-items: stretch;
-  z-index: 5;
+  display:flex; gap: 10px; align-items: stretch; z-index: 5;
 }
 .pd-actionbar .btn { flex:1; }
 .pd-wa {
   width: 56px; height: 50px; border-radius: 2px;
-  background: #25D366; color: white;
+  background: var(--whatsapp); color: white;
   display:flex; align-items:center; justify-content:center;
   font-size: 24px; font-weight: 700;
 }
 
-/* CART */
+/* ============ CART ============ */
 .cart-header {
   display:flex; align-items:center; justify-content:space-between;
-  padding: 20px;
-  border-bottom: 1px solid var(--line);
+  padding: 20px; border-bottom: 1px solid var(--line);
 }
 .cart-header .title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 22px; color: var(--gold); font-weight: 500;
-  letter-spacing: 0.5px;
+  font-size: 22px; color: var(--gold); font-weight: 500; letter-spacing: 0.5px;
 }
 .cart-header .close { color: var(--ivory); font-size: 22px; }
 .cart-line {
@@ -585,22 +497,15 @@ body {
 }
 .cart-img {
   width: 88px; height: 110px; border-radius: 2px;
-  background: var(--jet);
-  background-size: cover; background-position: center;
+  background: var(--jet); background-size: cover; background-position: center;
   border: 1px solid var(--line);
 }
-.cart-line-body {
-  flex:1; display:flex; flex-direction:column; justify-content:space-between;
-}
+.cart-line-body { flex:1; display:flex; flex-direction:column; justify-content:space-between; }
 .cart-line-name {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 17px; font-weight: 500; line-height: 1.25;
-  color: var(--ivory);
+  font-size: 17px; font-weight: 500; line-height: 1.25; color: var(--ivory);
 }
-.cart-line-price {
-  font-size: 13px; color: var(--gold); margin-top: 4px;
-  font-weight: 600;
-}
+.cart-line-price { font-size: 13px; color: var(--gold); margin-top: 4px; font-weight: 600; }
 .qty-control {
   display:flex; align-items:center; gap: 12px;
   border: 1px solid var(--line); border-radius: 999px;
@@ -608,9 +513,7 @@ body {
   align-self: flex-start; color: var(--ivory);
 }
 .qty-control .pm { color: var(--gold); }
-.cart-line-actions {
-  display:flex; justify-content:space-between; align-items:center;
-}
+.cart-line-actions { display:flex; justify-content:space-between; align-items:center; }
 .cart-remove { font-size: 11px; color: var(--muted); letter-spacing: 1.4px; text-transform: uppercase; }
 .cart-summary {
   position:absolute; left:0; right:0; bottom:0;
@@ -619,20 +522,16 @@ body {
   padding: 24px 20px 32px;
 }
 .cart-summary-row {
-  display:flex; justify-content:space-between; align-items:baseline;
-  margin-bottom: 6px;
+  display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 6px;
 }
 .cart-summary-row .lbl { font-size: 11px; color: var(--muted); letter-spacing: 1.6px; text-transform: uppercase; }
 .cart-summary-row .val {
   font-family: 'Cormorant Garamond', serif;
   font-size: 26px; font-weight: 600; color: var(--gold);
 }
-.cart-shipping {
-  font-size: 10px; color: var(--muted); margin-bottom: 18px;
-  letter-spacing: 1.4px; text-transform: uppercase;
-}
+.cart-shipping { font-size: 10px; color: var(--muted); margin-bottom: 18px; letter-spacing: 1.4px; text-transform: uppercase; }
 
-/* CUSTOM SCREEN */
+/* ============ CUSTOM ============ */
 .custom-body { padding: 60px 20px 110px; }
 .custom-title {
   font-family: 'Cormorant Garamond', serif;
@@ -652,22 +551,14 @@ body {
 .chip-wrap { display:flex; flex-wrap: wrap; gap: 8px; }
 .note-input {
   min-height: 110px; padding: 16px;
-  border: 1px solid var(--line);
-  background: var(--jet);
+  border: 1px solid var(--line); background: var(--jet);
   font-family: inherit; font-size: 13px; color: var(--muted);
   border-left: 3px solid var(--gold);
 }
 
-/* ACCOUNT */
-.acc-tile {
-  background: var(--jet);
-  border: 1px solid var(--line);
-  margin-top: 10px;
-}
-.acc-row {
-  display:flex; align-items:center; justify-content:space-between;
-  padding: 18px 18px;
-}
+/* ============ ACCOUNT ============ */
+.acc-tile { background: var(--jet); border: 1px solid var(--line); margin-top: 10px; }
+.acc-row { display:flex; align-items:center; justify-content:space-between; padding: 18px 18px; }
 .acc-row + .acc-row { border-top: 1px solid var(--lineSoft); }
 .acc-row-left { display:flex; align-items:center; gap: 14px; }
 .acc-row-icon {
@@ -677,19 +568,16 @@ body {
   color: var(--gold); font-size: 16px;
   border: 1px solid rgba(212,175,55,0.25);
 }
-.acc-row-icon.wa { background: rgba(37,211,102,0.15); border-color: #25D366; color: #25D366; }
+.acc-row-icon.wa { background: rgba(37,211,102,0.15); border-color: var(--whatsapp); color: var(--whatsapp); }
 .acc-row-label { font-size: 14px; font-weight: 500; color: var(--ivory); }
-.acc-row-sub {
-  font-size: 11px; color: var(--gold); margin-top: 3px;
-  letter-spacing: 0.5px;
-}
+.acc-row-sub { font-size: 11px; color: var(--gold); margin-top: 3px; letter-spacing: 0.5px; }
 .acc-section { margin-top: 28px; }
 .acc-section-label {
   font-size: 10px; letter-spacing: 2.4px; text-transform: uppercase;
   color: var(--gold); font-weight: 700; padding: 0 4px;
 }
 
-/* FOOTER */
+/* ============ FOOTER ============ */
 .footer {
   text-align: center; margin: 80px auto 0;
   font-size: 11px; opacity: 0.4;
@@ -711,12 +599,12 @@ body {
 <div class="intro">
   <div class="eyebrow">Atelier Preview · 2026</div>
   <h1>Tomer Dahan Jewelry</h1>
-  <p>Six core screens — black, gold, and burning gemstone.<br>Same theme tokens and product structure as the React Native build.</p>
+  <p>Six core screens, the studio's actual catalog: Magen David and Hamsa pavé, gold-filigree statement rings, halo engagement, black-bead bracelets with diamond charms.</p>
 </div>
 
 <div class="grid">
 
-<!-- HOME -->
+<!-- ============ HOME ============ -->
 <div class="phone-wrap">
   <div class="phone">
     <div class="screen">
@@ -724,23 +612,29 @@ body {
         <div class="hero-img"></div>
         <div class="hero-content">
           <div class="hero-top">
-            <div class="brand-mark">
-              <div class="td-mono">T · D</div>
-              <div class="td-sub">Tomer Dahan</div>
+            <div class="td-logo" style="align-items: flex-start">
+              <div style="display:flex; align-items:center; gap: 10px">
+                <div class="td-monogram" style="width:44px; height:44px; font-size:24px; box-shadow: 0 0 0 3px var(--ink), 0 0 0 4px rgba(212,175,55,0.4)">T</div>
+                <div>
+                  <div class="td-name" style="font-size:11px; letter-spacing:3px">TOMER DAHAN</div>
+                  <div class="td-tag" style="font-size:7px; letter-spacing:2px; margin-top:2px">Handmade Jewellery</div>
+                </div>
+              </div>
             </div>
             <div class="bag-btn">⌘<div class="bag-badge">2</div></div>
           </div>
-          <div class="eyebrow">Atelier · Tel Aviv</div>
+          <div class="eyebrow">✡ Custom Handmade · Tel Aviv</div>
           <h1 class="hero-title">Forged
 in <span class="gold">stone</span>.</h1>
           <div class="hero-rule"></div>
-          <p class="hero-sub">Hand-knotted malas and statement jewelry. Ruby, emerald, sapphire — strung one by one in the studio.</p>
-          <div class="hero-cta">
+          <p class="hero-sub">Star of David, Hamsa, statement rings — every piece set by hand in the Tel Aviv studio. One of one.</p>
+          <div style="margin-top: 24px; align-self: flex-start">
             <span class="btn btn-gold">Enter the collection →</span>
           </div>
         </div>
       </section>
 
+      <!-- Latest releases -->
       <section class="section">
         <div class="section-head">
           <div class="eyebrow">New this month</div>
@@ -748,97 +642,124 @@ in <span class="gold">stone</span>.</h1>
         </div>
         <div class="hscroll">
           <div class="card">
-            <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500&q=85')">
+            <div class="card-image" style="background-image:url('../assets/instagram/ig-grid-05.jpg')">
               <div class="card-save">♥</div>
               <div class="card-badge">1 / 1</div>
             </div>
             <div class="card-body">
-              <div class="card-name">Ruby Mala · Onyx Anchors</div>
+              <div class="card-name">Diamond Pavé Magen David</div>
               <div class="card-meta">
-                <div class="card-stones">
-                  <div class="stone-dot" style="background:var(--ruby)"></div>
-                  <div class="stone-dot" style="background:var(--onyx); border-color:var(--gold)"></div>
-                </div>
-                <div class="card-price">$890</div>
+                <div class="card-stones"><div class="stone-dot" style="background:var(--diamond)"></div></div>
+                <div class="card-price">$2,480</div>
               </div>
             </div>
           </div>
           <div class="card">
-            <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=500&q=85')">
+            <div class="card-image" style="background-image:url('../assets/instagram/ig-grid-06.jpg')">
               <div class="card-save">♥</div>
+              <div class="card-badge">1 / 1</div>
             </div>
             <div class="card-body">
-              <div class="card-name">Sapphire Double Wrap</div>
+              <div class="card-name">Onyx Bead · Diamond Bar</div>
+              <div class="card-meta">
+                <div class="card-stones">
+                  <div class="stone-dot" style="background:var(--onyx); border-color:var(--gold)"></div>
+                  <div class="stone-dot" style="background:var(--diamond)"></div>
+                </div>
+                <div class="card-price">$1,680</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-image" style="background-image:url('../assets/instagram/ig-grid-04.jpg')">
+              <div class="card-save">♥</div>
+              <div class="card-badge">1 / 1</div>
+            </div>
+            <div class="card-body">
+              <div class="card-name">Sapphire Filigree Cocktail</div>
               <div class="card-meta">
                 <div class="card-stones">
                   <div class="stone-dot" style="background:var(--sapphire)"></div>
+                  <div class="stone-dot" style="background:var(--diamond)"></div>
                 </div>
-                <div class="card-price">$420</div>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500&q=85')">
-              <div class="card-save">♥</div>
-            </div>
-            <div class="card-body">
-              <div class="card-name">Garnet Monolith Ring</div>
-              <div class="card-meta">
-                <div class="card-stones">
-                  <div class="stone-dot" style="background:var(--garnet)"></div>
-                </div>
-                <div class="card-price">$320</div>
+                <div class="card-price">$3,680</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
+      <!-- Categories -->
       <section class="section">
         <div class="section-head">
           <div class="eyebrow">Browse</div>
           <h2 class="section-title">By <span class="accent">category</span></h2>
         </div>
         <div class="hscroll">
-          <div class="cat-card" style="background-image:url('https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500&q=85')">
-            <div class="label">Mala<br><span class="accent">12 pieces</span></div>
+          <div class="cat-card" style="background-image:url('../assets/instagram/ig-grid-03.jpg')">
+            <div class="label">Magen<br>David<span class="count">3 pieces</span></div>
           </div>
-          <div class="cat-card" style="background-image:url('https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500&q=85')">
-            <div class="label">Necklaces<br><span class="accent">8 pieces</span></div>
+          <div class="cat-card" style="background-image:url('../assets/instagram/ig-grid-03.jpg'); background-position: 60% 60%">
+            <div class="label">Hamsa<span class="count">1 piece</span></div>
           </div>
-          <div class="cat-card" style="background-image:url('https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=500&q=85')">
-            <div class="label">Bracelets<br><span class="accent">6 pieces</span></div>
+          <div class="cat-card" style="background-image:url('../assets/instagram/ig-grid-04.jpg')">
+            <div class="label">Engagement<span class="count">2 pieces</span></div>
+          </div>
+          <div class="cat-card" style="background-image:url('../assets/instagram/ig-grid-04.jpg'); background-position: 70% 30%">
+            <div class="label">Cocktail<br>Rings<span class="count">5 pieces</span></div>
           </div>
         </div>
       </section>
 
+      <!-- Stones -->
       <section class="section">
         <div class="section-head">
           <div class="eyebrow">Stones</div>
           <h2 class="section-title">Choose your <span class="accent">gem</span></h2>
         </div>
         <div class="stone-row">
+          <div class="stone-pill"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #fff, var(--diamond))"></span>Diamond</div>
           <div class="stone-pill"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #ff4458, var(--ruby) 50%, var(--rubyDeep))"></span>Ruby</div>
           <div class="stone-pill"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #2EE89A, var(--emerald) 50%, var(--emeraldDeep))"></span>Emerald</div>
           <div class="stone-pill"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #4080FF, var(--sapphire) 50%, var(--sapphireDeep))"></span>Sapphire</div>
           <div class="stone-pill"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #444, var(--onyx))"></span>Onyx</div>
-          <div class="stone-pill"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #E8A04A, var(--tigerEye))"></span>Tiger's Eye</div>
-          <div class="stone-pill"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #50D4D4, var(--turquoise))"></span>Turquoise</div>
+          <div class="stone-pill"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #ff8eb8, var(--pinkTourm))"></span>Pink Tourm.</div>
         </div>
       </section>
 
+      <!-- Bespoke -->
       <div class="bespoke">
         <div class="eyebrow">Bespoke</div>
         <h2>Made for <span class="gold">you</span>.</h2>
-        <p>Every piece begins as a conversation. Stones, length, the meaning behind it — and I will build it.</p>
+        <p>Engagement, monogram, Magen David — every piece begins as a conversation. WhatsApp the studio with stones, length, and the meaning behind it.</p>
         <span class="btn btn-gold">Begin a custom piece →</span>
       </div>
 
-      <section class="section story" style="padding-bottom: 130px; border-bottom: none">
+      <!-- Live from the studio (mosaic of his actual feed) -->
+      <section class="section" style="padding-bottom: 0; border-bottom: none">
+        <div class="section-head">
+          <div class="eyebrow">From the studio</div>
+          <h2 class="section-title">Live <span class="accent">on Instagram</span></h2>
+        </div>
+      </section>
+      <div class="feed-mosaic">
+        <div class="feed-cell" style="background-image:url('../assets/instagram/ig-grid-02.jpg'); background-position: 0% 0%"></div>
+        <div class="feed-cell" style="background-image:url('../assets/instagram/ig-grid-02.jpg'); background-position: 50% 0%"></div>
+        <div class="feed-cell" style="background-image:url('../assets/instagram/ig-grid-02.jpg'); background-position: 100% 0%"></div>
+        <div class="feed-cell" style="background-image:url('../assets/instagram/ig-grid-04.jpg'); background-position: 0% 0%"></div>
+        <div class="feed-cell" style="background-image:url('../assets/instagram/ig-grid-04.jpg'); background-position: 50% 0%"></div>
+        <div class="feed-cell" style="background-image:url('../assets/instagram/ig-grid-04.jpg'); background-position: 100% 0%"></div>
+        <div class="feed-cell" style="background-image:url('../assets/instagram/ig-grid-05.jpg'); background-position: 0% 0%"></div>
+        <div class="feed-cell" style="background-image:url('../assets/instagram/ig-grid-05.jpg'); background-position: 50% 0%"></div>
+        <div class="feed-cell" style="background-image:url('../assets/instagram/ig-grid-05.jpg'); background-position: 100% 0%"></div>
+      </div>
+
+      <!-- Maker story -->
+      <section class="section" style="padding-bottom: 130px; border-bottom: none">
         <div class="eyebrow">The maker</div>
         <h2 class="section-title">A studio in <span class="accent">Tel Aviv</span>.</h2>
-        <p>Tomer Dahan has been threading gemstones for over a decade — natural ruby, emerald, sapphire and onyx, set with hand-finished gold and oxidized silver. Each mala is strung individually; no two pieces are identical.</p>
-        <div class="more">Read the story  →</div>
+        <p style="margin-top: 16px; color: var(--ivory); opacity: 0.7; line-height: 1.7; font-size: 13px">Tomer Dahan has been making jewelry by hand for over a decade — Magen David and Hamsa pavé, fine gold filigree, halo settings, and one-off cocktail rings. Every piece is built to order in the boutique on Dizengoff.</p>
+        <div style="margin-top: 20px; font-size: 11px; font-weight: 700; letter-spacing: 2.2px; text-transform: uppercase; color: var(--gold)">Read the story →</div>
       </section>
     </div>
 
@@ -853,7 +774,7 @@ in <span class="gold">stone</span>.</h1>
   <div class="phone-label">Home</div>
 </div>
 
-<!-- SHOP -->
+<!-- ============ SHOP ============ -->
 <div class="phone-wrap">
   <div class="phone">
     <div class="screen">
@@ -867,75 +788,75 @@ in <span class="gold">stone</span>.</h1>
       </div>
       <div class="chip-row">
         <div class="chip">All</div>
-        <div class="chip active">Mala Beads</div>
-        <div class="chip">Necklaces</div>
+        <div class="chip active">Magen David</div>
+        <div class="chip">Hamsa</div>
+        <div class="chip">Engagement</div>
+        <div class="chip">Cocktail</div>
         <div class="chip">Bracelets</div>
-        <div class="chip">Rings</div>
       </div>
       <div class="chip-row">
-        <div class="stone-pill"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #ff4458, var(--ruby) 50%, var(--rubyDeep))"></span>Ruby</div>
-        <div class="stone-pill selected"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #2EE89A, var(--emerald) 50%, var(--emeraldDeep))"></span>Emerald</div>
-        <div class="stone-pill"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #4080FF, var(--sapphire) 50%, var(--sapphireDeep))"></span>Sapphire</div>
-        <div class="stone-pill"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #444, var(--onyx))"></span>Onyx</div>
+        <div class="stone-pill selected"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #fff, var(--diamond))"></span>Diamond</div>
+        <div class="stone-pill"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #ff4458, var(--ruby))"></span>Ruby</div>
+        <div class="stone-pill"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #2EE89A, var(--emerald))"></span>Emerald</div>
+        <div class="stone-pill"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #4080FF, var(--sapphire))"></span>Sapphire</div>
       </div>
       <div class="grid2">
         <div class="card" style="width:auto">
-          <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500&q=85')">
+          <div class="card-image" style="background-image:url('../assets/instagram/ig-grid-05.jpg')">
             <div class="card-save">♥</div>
             <div class="card-badge">1 / 1</div>
           </div>
           <div class="card-body">
-            <div class="card-name">Emerald Strand</div>
+            <div class="card-name">Diamond Pavé Magen David</div>
             <div class="card-meta">
-              <div class="card-stones"><div class="stone-dot" style="background:var(--emerald)"></div></div>
-              <div class="card-price">$1,240</div>
+              <div class="card-stones"><div class="stone-dot" style="background:var(--diamond)"></div></div>
+              <div class="card-price">$2,480</div>
             </div>
           </div>
         </div>
         <div class="card" style="width:auto">
-          <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1635767582909-345e0a4cc44a?w=500&q=85')">
+          <div class="card-image" style="background-image:url('../assets/instagram/ig-grid-03.jpg')">
             <div class="card-save">♥</div>
             <div class="card-badge">1 / 1</div>
           </div>
           <div class="card-body">
-            <div class="card-name">Mixed Stone Mala</div>
+            <div class="card-name">Multi-Stone Magen David</div>
             <div class="card-meta">
               <div class="card-stones">
                 <div class="stone-dot" style="background:var(--ruby)"></div>
-                <div class="stone-dot" style="background:var(--emerald)"></div>
                 <div class="stone-dot" style="background:var(--sapphire)"></div>
+                <div class="stone-dot" style="background:var(--diamond)"></div>
               </div>
-              <div class="card-price">$1,680</div>
+              <div class="card-price">$3,240</div>
             </div>
           </div>
         </div>
         <div class="card" style="width:auto">
-          <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500&q=85')">
+          <div class="card-image" style="background-image:url('../assets/instagram/ig-grid-03.jpg'); background-position: 30% 70%">
             <div class="card-save">♥</div>
+            <div class="card-badge">1 / 1</div>
           </div>
           <div class="card-body">
-            <div class="card-name">Ruby Mala</div>
+            <div class="card-name">Magen David · Emerald Center</div>
             <div class="card-meta">
               <div class="card-stones">
-                <div class="stone-dot" style="background:var(--ruby)"></div>
-                <div class="stone-dot" style="background:var(--onyx)"></div>
+                <div class="stone-dot" style="background:var(--emerald)"></div>
+                <div class="stone-dot" style="background:var(--diamond)"></div>
               </div>
-              <div class="card-price">$890</div>
+              <div class="card-price">$1,980</div>
             </div>
           </div>
         </div>
         <div class="card" style="width:auto">
-          <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1535556261540-c3bae84d2c8d?w=500&q=85')">
+          <div class="card-image" style="background-image:url('../assets/instagram/ig-grid-04.jpg')">
             <div class="card-save">♥</div>
+            <div class="card-badge">1 / 1</div>
           </div>
           <div class="card-body">
-            <div class="card-name">Tiger's Eye Mala</div>
+            <div class="card-name">Cushion Double-Halo</div>
             <div class="card-meta">
-              <div class="card-stones">
-                <div class="stone-dot" style="background:var(--tigerEye)"></div>
-                <div class="stone-dot" style="background:var(--onyx)"></div>
-              </div>
-              <div class="card-price">$540</div>
+              <div class="card-stones"><div class="stone-dot" style="background:var(--diamond)"></div></div>
+              <div class="card-price">$6,800</div>
             </div>
           </div>
         </div>
@@ -949,14 +870,14 @@ in <span class="gold">stone</span>.</h1>
       <div class="tab"><div class="tab-icon">◯</div><div class="tab-label">Account</div></div>
     </div>
   </div>
-  <div class="phone-label">Shop · Emerald</div>
+  <div class="phone-label">Shop · Magen David</div>
 </div>
 
-<!-- PRODUCT DETAIL -->
+<!-- ============ PRODUCT DETAIL ============ -->
 <div class="phone-wrap">
   <div class="phone">
     <div class="screen">
-      <div class="pd-gallery" style="background-image:url('https://images.unsplash.com/photo-1635767582909-345e0a4cc44a?w=700&q=90')">
+      <div class="pd-gallery" style="background-image:url('../assets/instagram/ig-grid-04.jpg')">
         <div class="pd-top">
           <div class="pd-icon-btn">‹</div>
           <div class="pd-icon-btn" style="color: var(--ruby); border-color: var(--ruby)">♥</div>
@@ -969,24 +890,23 @@ in <span class="gold">stone</span>.</h1>
       </div>
       <div class="pd-body" style="padding-bottom: 120px">
         <div class="pd-1of1">★ One of a kind</div>
-        <h1 class="pd-name">Mixed Stone <span class="accent">Mala</span></h1>
+        <h1 class="pd-name">Sapphire Filigree <span class="accent">Cocktail</span></h1>
         <div class="pd-price-row">
-          <div class="pd-price">$1,680</div>
+          <div class="pd-price">$3,680</div>
         </div>
-        <p class="pd-desc">A peacock-pattern mala — alternating ruby, emerald and sapphire beads with a hand-hammered 18k bead. The studio centerpiece.</p>
+        <p class="pd-desc">A heavy oval blue sapphire bezel-set in deeply carved 18k gold filigree, accented with diamond shoulders. Unisex sizing — sized to order.</p>
 
         <div class="pd-specs">
           <div>
             <div class="pd-spec-label">Stones</div>
             <div class="stone-row">
-              <div class="stone-pill"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #ff4458, var(--ruby) 50%, var(--rubyDeep))"></span>Ruby</div>
-              <div class="stone-pill"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #2EE89A, var(--emerald) 50%, var(--emeraldDeep))"></span>Emerald</div>
               <div class="stone-pill"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #4080FF, var(--sapphire) 50%, var(--sapphireDeep))"></span>Sapphire</div>
+              <div class="stone-pill"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #fff, var(--diamond))"></span>Diamond</div>
             </div>
           </div>
           <div>
-            <div class="pd-spec-label">Length</div>
-            <div class="pd-spec-value">84 cm</div>
+            <div class="pd-spec-label">Weight</div>
+            <div class="pd-spec-value">18g</div>
           </div>
           <div>
             <div class="pd-spec-label">Metal</div>
@@ -996,7 +916,7 @@ in <span class="gold">stone</span>.</h1>
 
         <div class="pd-care">
           <div class="eyebrow">Care</div>
-          <p>Hand-knotted on natural silk. Avoid water and perfume. Polish gold elements with a soft cotton cloth.</p>
+          <p>Avoid contact with chlorine and perfume. Polish gold elements with a soft cotton cloth. Lifetime resize and refinish in-studio.</p>
         </div>
 
         <div class="pd-shipping">✦ Ships worldwide from Tel Aviv</div>
@@ -1010,35 +930,36 @@ in <span class="gold">stone</span>.</h1>
   <div class="phone-label">Product Detail</div>
 </div>
 
-<!-- CUSTOM -->
+<!-- ============ CUSTOM ============ -->
 <div class="phone-wrap">
   <div class="phone">
     <div class="screen">
       <div class="custom-body">
         <div class="eyebrow">Bespoke</div>
         <h1 class="custom-title">A piece of your <span class="accent">own</span>.</h1>
-        <p class="custom-sub">Share what you have in mind — stones, length, occasion. I'll reply within 48 hours.</p>
+        <p class="custom-sub">Engagement ring, Magen David, monogram pendant — share what you have in mind. I'll reply within 48 hours.</p>
 
         <div class="field">
           <div class="field-label">Type of piece</div>
           <div class="chip-wrap">
-            <div class="chip active">Mala Beads</div>
-            <div class="chip">Necklaces</div>
-            <div class="chip">Bracelets</div>
-            <div class="chip">Rings</div>
-            <div class="chip">Pendants</div>
+            <div class="chip active">Magen David</div>
+            <div class="chip">Hamsa</div>
+            <div class="chip">Engagement</div>
+            <div class="chip">Cocktail Ring</div>
+            <div class="chip">Bracelet</div>
+            <div class="chip">Letter Pendant</div>
           </div>
         </div>
 
         <div class="field">
           <div class="field-label">Preferred stones</div>
           <div class="stone-row">
-            <div class="stone-pill selected"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #ff4458, var(--ruby) 50%, var(--rubyDeep))"></span>Ruby</div>
-            <div class="stone-pill selected"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #2EE89A, var(--emerald) 50%, var(--emeraldDeep))"></span>Emerald</div>
-            <div class="stone-pill"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #4080FF, var(--sapphire) 50%, var(--sapphireDeep))"></span>Sapphire</div>
+            <div class="stone-pill selected"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #fff, var(--diamond))"></span>Diamond</div>
+            <div class="stone-pill selected"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #ff4458, var(--ruby))"></span>Ruby</div>
+            <div class="stone-pill"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #2EE89A, var(--emerald))"></span>Emerald</div>
+            <div class="stone-pill"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #4080FF, var(--sapphire))"></span>Sapphire</div>
             <div class="stone-pill"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #444, var(--onyx))"></span>Onyx</div>
-            <div class="stone-pill"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #E8A04A, var(--tigerEye))"></span>Tiger's Eye</div>
-            <div class="stone-pill"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #4080FF, var(--lapis))"></span>Lapis</div>
+            <div class="stone-pill"><span class="swatch" style="background:radial-gradient(circle at 30% 30%, #ff8eb8, var(--pinkTourm))"></span>Pink Tourm.</div>
           </div>
         </div>
 
@@ -1064,7 +985,7 @@ in <span class="gold">stone</span>.</h1>
   <div class="phone-label">Custom Order</div>
 </div>
 
-<!-- CART -->
+<!-- ============ CART ============ -->
 <div class="phone-wrap">
   <div class="phone">
     <div class="screen">
@@ -1075,11 +996,11 @@ in <span class="gold">stone</span>.</h1>
         <div style="width:24px"></div>
       </div>
       <div class="cart-line">
-        <div class="cart-img" style="background-image:url('https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&q=85')"></div>
+        <div class="cart-img" style="background-image:url('../assets/instagram/ig-grid-05.jpg')"></div>
         <div class="cart-line-body">
           <div>
-            <div class="cart-line-name">Ruby Mala · Onyx Anchors</div>
-            <div class="cart-line-price">$890</div>
+            <div class="cart-line-name">Diamond Pavé Magen David</div>
+            <div class="cart-line-price">$2,480</div>
           </div>
           <div class="cart-line-actions">
             <div class="qty-control"><span class="pm">−</span> 1 <span class="pm">+</span></div>
@@ -1088,11 +1009,11 @@ in <span class="gold">stone</span>.</h1>
         </div>
       </div>
       <div class="cart-line">
-        <div class="cart-img" style="background-image:url('https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=400&q=85')"></div>
+        <div class="cart-img" style="background-image:url('../assets/instagram/ig-grid-06.jpg')"></div>
         <div class="cart-line-body">
           <div>
-            <div class="cart-line-name">Garnet Monolith Ring</div>
-            <div class="cart-line-price">$320</div>
+            <div class="cart-line-name">Onyx Bead · Diamond Bar</div>
+            <div class="cart-line-price">$1,680</div>
           </div>
           <div class="cart-line-actions">
             <div class="qty-control"><span class="pm">−</span> 1 <span class="pm">+</span></div>
@@ -1104,7 +1025,7 @@ in <span class="gold">stone</span>.</h1>
     <div class="cart-summary">
       <div class="cart-summary-row">
         <span class="lbl">Subtotal</span>
-        <span class="val">$1,210</span>
+        <span class="val">$4,160</span>
       </div>
       <div class="cart-shipping">Shipping calculated at checkout</div>
       <span class="btn btn-gold btn-block">⌬ Reserve via WhatsApp</span>
@@ -1113,23 +1034,41 @@ in <span class="gold">stone</span>.</h1>
   <div class="phone-label">Bag (modal)</div>
 </div>
 
-<!-- ACCOUNT -->
+<!-- ============ ACCOUNT ============ -->
 <div class="phone-wrap">
   <div class="phone">
     <div class="screen">
       <div class="custom-body" style="padding-top: 64px">
         <div class="eyebrow">Account</div>
-        <h1 class="custom-title">Your <span class="accent">studio</span>.</h1>
+
+        <!-- Brand mark in account -->
+        <div style="margin-top: 24px; padding: 28px 16px; background: var(--jet); border: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; gap: 10px; position: relative; overflow: hidden">
+          <div style="position:absolute; top:0; left:0; right:0; height:1px; background: linear-gradient(90deg, transparent, var(--gold), transparent)"></div>
+          <div class="td-monogram">T</div>
+          <div class="td-name">TOMER DAHAN</div>
+          <div class="td-tag">Handmade Jewellery Boutique</div>
+          <div style="font-size: 11px; color: var(--gold); margin-top: 4px; letter-spacing: 1px">✡ ⋅ Tel Aviv ⋅ ✡</div>
+        </div>
 
         <div class="acc-section">
-          <div class="acc-section-label">Contact the studio</div>
+          <div class="acc-section-label">Reach the studio</div>
           <div class="acc-tile">
             <div class="acc-row">
               <div class="acc-row-left">
                 <div class="acc-row-icon wa">⌬</div>
                 <div>
                   <div class="acc-row-label">WhatsApp</div>
-                  <div class="acc-row-sub">+972-54-8167131</div>
+                  <div class="acc-row-sub">+972-54-816-7131</div>
+                </div>
+              </div>
+              <div style="color:var(--gold)">›</div>
+            </div>
+            <div class="acc-row">
+              <div class="acc-row-left">
+                <div class="acc-row-icon">☏</div>
+                <div>
+                  <div class="acc-row-label">Studio landline</div>
+                  <div class="acc-row-sub">+972-77-451-9989</div>
                 </div>
               </div>
               <div style="color:var(--gold)">›</div>
@@ -1154,15 +1093,13 @@ in <span class="gold">stone</span>.</h1>
               </div>
               <div style="color:var(--gold)">›</div>
             </div>
-          </div>
-        </div>
-
-        <div class="acc-section">
-          <div class="acc-tile">
             <div class="acc-row">
               <div class="acc-row-left">
-                <div class="acc-row-icon">ⓘ</div>
-                <div class="acc-row-label">About the maker</div>
+                <div class="acc-row-icon">@</div>
+                <div>
+                  <div class="acc-row-label">Threads</div>
+                  <div class="acc-row-sub">@tomerdahanjewelry</div>
+                </div>
               </div>
               <div style="color:var(--gold)">›</div>
             </div>
@@ -1196,7 +1133,7 @@ in <span class="gold">stone</span>.</h1>
 
 </div>
 
-<div class="footer">Designed for Tomer Dahan Jewelry · Tel Aviv</div>
+<div class="footer">Designed for Tomer Dahan Jewelry · @tomerdahanjewelry · Tel Aviv</div>
 
 </body>
 </html>

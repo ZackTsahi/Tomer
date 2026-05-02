@@ -1,58 +1,83 @@
 import type { Category } from '@/types/product';
 
+// Category list ordered to match what dominates the studio's actual feed:
+// Star of David and Hamsa pendants come first (signature category), then
+// engagement & cocktail rings, then bracelets and the rest.
 export const categoryMeta: Record<
   Category,
-  { label: string; labelHe: string; description: string; descriptionHe: string; image: string }
+  {
+    label: string;
+    labelHe: string;
+    description: string;
+    descriptionHe: string;
+    image: string;
+  }
 > = {
-  mala: {
-    label: 'Mala Beads',
-    labelHe: 'מאלות',
-    description: 'Hand-knotted strands of natural gemstone, the studio signature.',
-    descriptionHe: 'חוטי אבני חן טבעיות שזורים ביד — חתימת הסטודיו.',
-    image: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=1200&q=80',
+  magenDavid: {
+    label: 'Star of David',
+    labelHe: 'מגן דוד',
+    description: 'Diamond pavé and rare gem-set Magen David — the studio signature.',
+    descriptionHe: 'מגני דוד משובצי יהלומים ואבני חן — חתימת הסטודיו.',
+    image: require('../../assets/instagram/ig-grid-03.jpg'),
   },
-  necklace: {
-    label: 'Necklaces',
-    labelHe: 'שרשראות',
-    description: 'Statement chains and pendants for everyday weight.',
-    descriptionHe: 'שרשראות סטייטמנט ותליונים לכובד יומיומי.',
-    image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=1200&q=80',
+  hamsa: {
+    label: 'Hamsa',
+    labelHe: 'חמסה',
+    description: 'Hand-set hamsa pendants with ruby, sapphire, and diamond.',
+    descriptionHe: 'תליוני חמסה משובצים יד באודם, ספיר ויהלום.',
+    image: require('../../assets/instagram/ig-grid-03.jpg'),
+  },
+  engagement: {
+    label: 'Engagement',
+    labelHe: 'אירוסין',
+    description: 'Halo, double-halo and pear-cut engagement rings.',
+    descriptionHe: 'טבעות אירוסין הילו, הילו כפול וקאט פיר.',
+    image: require('../../assets/instagram/ig-grid-04.jpg'),
+  },
+  ring: {
+    label: 'Cocktail Rings',
+    labelHe: 'טבעות סטייטמנט',
+    description: 'Heavy gold filigree set with sapphire, ruby, and emerald.',
+    descriptionHe: 'פיליגרן זהב כבד עם ספיר, אודם ואזמרגד.',
+    image: require('../../assets/instagram/ig-grid-04.jpg'),
   },
   bracelet: {
     label: 'Bracelets',
     labelHe: 'צמידים',
-    description: 'Stacked stones and braided cords, finished by hand.',
-    descriptionHe: 'אבנים מצורפות וחוטים שזורים, מוגמרים ידנית.',
-    image: 'https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=1200&q=80',
+    description: 'Black bead bracelets with diamond pendants and stacked thin bands.',
+    descriptionHe: 'צמידי חרוזים שחורים עם תליוני יהלומים, וצמידים דקים מוערמים.',
+    image: require('../../assets/instagram/ig-grid-06.jpg'),
   },
-  ring: {
-    label: 'Rings',
-    labelHe: 'טבעות',
-    description: 'Sculpted bands in oxidized silver and warm gold.',
-    descriptionHe: 'טבעות מפוסלות בכסף מחומצן וזהב חם.',
-    image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=1200&q=80',
+  necklace: {
+    label: 'Necklaces',
+    labelHe: 'שרשראות',
+    description: 'Layered diamond strands and bold rope chains.',
+    descriptionHe: 'שרשראות יהלומים בשכבות וחבלי זהב.',
+    image: require('../../assets/instagram/ig-grid-02.jpg'),
   },
   pendant: {
     label: 'Pendants',
     labelHe: 'תליונים',
-    description: 'Stones set as singular focal points.',
-    descriptionHe: 'אבנים משובצות כנקודת מוקד.',
-    image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1200&q=80',
+    description: 'Diamond letter monograms and stone-set focal pieces.',
+    descriptionHe: 'אותיות מונוגרם יהלומים וחלקי מוקד משובצי אבן.',
+    image: require('../../assets/instagram/ig-grid-05.jpg'),
   },
   earring: {
     label: 'Earrings',
     labelHe: 'עגילים',
-    description: 'Subtle metalwork, pierced and hand-finished.',
-    descriptionHe: 'עבודת מתכת עדינה, חתוכה וגומרה ביד.',
-    image: 'https://images.unsplash.com/photo-1535632787350-4e68ef0ac584?w=1200&q=80',
+    description: 'Diamond drops, halo studs, and waterfall earrings.',
+    descriptionHe: 'טיפות יהלום, צמודים הילו, ועגילי מפל.',
+    image: require('../../assets/instagram/ig-grid-04.jpg'),
   },
 };
 
 export const categoryOrder: Category[] = [
-  'mala',
-  'necklace',
-  'bracelet',
+  'magenDavid',
+  'hamsa',
+  'engagement',
   'ring',
+  'bracelet',
+  'necklace',
   'pendant',
   'earring',
 ];

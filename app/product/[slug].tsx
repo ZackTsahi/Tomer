@@ -22,6 +22,7 @@ import { useSaved } from '@/state/SavedContext';
 import { useI18n, useT } from '@/i18n/I18nProvider';
 import { whatsappLink } from '@/data/contact';
 import { formatLength, formatPrice } from '@/utils/format';
+import { imageSource } from '@/utils/image';
 import { colors, radius, spacing, typography } from '@/theme';
 
 const HORIZONTAL = Dimensions.get('window').width;
@@ -84,10 +85,10 @@ export default function ProductScreen() {
             pagingEnabled
             showsHorizontalScrollIndicator={false}
           >
-            {gallery.map((uri, i) => (
+            {gallery.map((src, i) => (
               <Image
                 key={i}
-                source={{ uri }}
+                source={imageSource(src)}
                 style={{ width: HORIZONTAL, height: HORIZONTAL * 1.2 }}
                 contentFit="cover"
               />
