@@ -1,0 +1,42 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - claude/react-native-jewelry-app-CZ5kk
+
+jobs:
+  build:
+    name: Build APK on EAS
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Set up Expo + EAS
+        uses: expo/expo-github-action@v8
+        with:
+          expo-version: latest
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Initialize EAS project (first run only, no-op afterwards)
+        run: npx eas-cli@latest init --non-interactive --force || true
+
+      - name: Build APK
+        run: npx eas-cli@latest build --platform android --profile preview --non-interactive --no-wait
+
+      - name: Print build URL
+        run: |
+          echo "Build started. Track progress and download the APK at:"
+          echo "https://expo.dev/accounts/$(npx eas-cli@latest whoami)/projects/tomer-dahan-jewelry/builds"
