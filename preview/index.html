@@ -1,0 +1,950 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tomer Dahan Jewelry — App Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ivory:#F5F0E6; --cream:#EDE5D3; --parchment:#FAF7F2;
+  --charcoal:#1A1714; --obsidian:#0E0C0A; --smoke:#3A332C;
+  --gold:#B8893E; --goldLight:#D4AB66; --goldDeep:#8C6322; --silver:#A9A29B;
+  --ruby:#7A1F2A; --emerald:#1F5C46; --sapphire:#1E3A5F; --onyx:#181410;
+  --tigerEye:#8C5A1F; --turquoise:#3E8C8C; --pearl:#E9E2D2;
+  --lapis:#234A7A; --garnet:#5A1620; --agate:#6B4226;
+  --textPrimary:#1A1714; --textSecondary:#6B5F52; --textMuted:#9A8E81;
+  --border:#D9CFBE; --divider:#E5DCC9;
+}
+
+* { box-sizing: border-box; margin:0; padding:0; }
+
+body {
+  background: linear-gradient(180deg, #1a1714 0%, #2b2520 100%);
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #F5F0E6;
+  min-height: 100vh;
+  padding: 32px 16px 80px;
+}
+
+.intro {
+  max-width: 840px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+.intro .eyebrow {
+  font-size: 11px; letter-spacing: 2.4px; text-transform: uppercase;
+  color: var(--gold); font-weight: 500; margin-bottom: 12px;
+}
+.intro h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500; font-size: 36px; line-height: 1.15;
+  letter-spacing: -0.5px;
+}
+.intro p {
+  margin-top: 12px; opacity: 0.7; font-size: 15px; line-height: 1.5;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Phone frame */
+.phone-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.phone-label {
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gold); font-weight: 500;
+}
+.phone {
+  width: 360px;
+  height: 780px;
+  background: var(--parchment);
+  border-radius: 44px;
+  border: 8px solid #0a0908;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05) inset;
+  overflow: hidden;
+  position: relative;
+  color: var(--textPrimary);
+  font-size: 14px;
+}
+.phone::before {
+  /* Dynamic island */
+  content: ''; position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+  width: 100px; height: 26px; background: #000; border-radius: 16px; z-index: 100;
+}
+.statusbar {
+  height: 44px; padding: 0 24px;
+  display:flex; align-items:flex-end; justify-content: space-between;
+  font-size: 12px; font-weight: 600; padding-bottom: 4px;
+  position: relative; z-index: 50;
+}
+.screen { height: calc(100% - 0px); overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.screen::-webkit-scrollbar { display: none; }
+
+/* Tab bar */
+.tabbar {
+  position:absolute; left:0; right:0; bottom:0;
+  background: rgba(245,240,230,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--divider);
+  display:flex; justify-content: space-around; align-items: center;
+  padding: 10px 4px 28px;
+  z-index: 40;
+}
+.tabbar .tab { display:flex; flex-direction:column; align-items:center; gap:4px; flex:1; }
+.tabbar .tab-icon {
+  font-size: 16px; color: var(--textMuted);
+}
+.tabbar .tab.active .tab-icon { color: var(--charcoal); }
+.tabbar .tab-label {
+  font-size: 9px; letter-spacing: 1.2px; text-transform: uppercase;
+  color: var(--textMuted); font-weight: 500;
+}
+.tabbar .tab.active .tab-label { color: var(--charcoal); }
+
+/* Typography utilities */
+.eyebrow {
+  font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase;
+  font-weight: 500; display:flex; align-items:center; gap: 8px;
+}
+.eyebrow::before { content:''; width:24px; height:1px; background: currentColor; }
+.eyebrow.gold { color: var(--gold); }
+.eyebrow.light { color: var(--parchment); }
+
+.serif { font-family: 'Playfair Display', serif; }
+
+/* Hero (Home) */
+.hero {
+  height: 560px;
+  position: relative;
+  background: #1a1714 url('https://images.unsplash.com/photo-1612207453817-2c540ec97f80?w=900&q=85') center/cover;
+}
+.hero::after {
+  content:''; position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(14,12,10,0.15) 0%, rgba(14,12,10,0.85) 100%);
+}
+.hero-content {
+  position:relative; z-index:2;
+  height:100%; display:flex; flex-direction:column;
+  padding: 56px 20px 32px;
+}
+.hero-top {
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom: auto;
+}
+.brand-mark {
+  font-size: 11px; letter-spacing: 2.4px; color: var(--parchment); font-weight: 500;
+}
+.bag-btn {
+  width: 36px; height: 36px; border-radius: 18px;
+  background: rgba(245,240,230,0.18);
+  display:flex; align-items:center; justify-content:center;
+  color: var(--parchment);
+  position: relative;
+}
+.bag-badge {
+  position:absolute; top:-4px; right:-4px;
+  min-width: 16px; height: 16px; border-radius: 8px; padding: 0 4px;
+  background: var(--gold); color: var(--charcoal);
+  font-size: 9px; font-weight: 600;
+  display:flex; align-items:center; justify-content:center;
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500; font-size: 40px; line-height: 1.1;
+  color: var(--parchment); letter-spacing: -0.5px;
+  margin: 16px 0 12px;
+  white-space: pre-line;
+}
+.hero-sub {
+  color: var(--parchment); opacity: 0.85; font-size: 14px; line-height: 1.5;
+  max-width: 280px;
+}
+.btn {
+  display:inline-flex; align-items:center; justify-content:center;
+  padding: 14px 24px; font-size: 11px; font-weight: 600;
+  letter-spacing: 1.6px; text-transform: uppercase;
+  border-radius: 4px; border: 1px solid transparent;
+  cursor: pointer; user-select:none;
+}
+.btn-gold { background: var(--gold); color: var(--parchment); border-color: var(--gold); }
+.btn-primary { background: var(--charcoal); color: var(--parchment); border-color: var(--charcoal); }
+.btn-secondary { background: transparent; color: var(--charcoal); border-color: var(--charcoal); }
+.btn-block { display:flex; width:100%; }
+.hero-cta { margin-top: 20px; align-self: flex-start; }
+
+/* Sections */
+.section {
+  padding: 32px 16px;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px; line-height: 1.25; color: var(--charcoal);
+  margin-top: 8px;
+}
+.section-head { margin-bottom: 16px; }
+
+/* Horizontal scrollers */
+.hscroll {
+  display:flex; gap: 12px; overflow-x: auto;
+  margin: 0 -16px; padding: 0 16px;
+  scrollbar-width: none;
+}
+.hscroll::-webkit-scrollbar { display:none; }
+
+/* Product card */
+.card { width: 150px; flex-shrink: 0; }
+.card-image {
+  aspect-ratio: 0.82; border-radius: 8px; background: var(--cream);
+  background-size: cover; background-position: center;
+  position: relative; overflow: hidden;
+}
+.card-save {
+  position:absolute; top:8px; right:8px;
+  width: 28px; height: 28px; border-radius: 14px;
+  background: rgba(245,240,230,0.92);
+  display:flex; align-items:center; justify-content:center;
+  color: var(--charcoal); font-size: 14px;
+}
+.card-badge {
+  position:absolute; bottom:8px; left:8px;
+  background: var(--charcoal); color: var(--parchment);
+  font-size: 9px; letter-spacing: 1.4px; font-weight: 500;
+  padding: 4px 8px; border-radius: 4px;
+}
+.card-body { padding-top: 10px; }
+.card-name { font-size: 14px; font-weight: 500; color: var(--textPrimary); line-height: 1.35; }
+.card-meta {
+  display:flex; justify-content: space-between; align-items: center; margin-top: 6px;
+}
+.card-stones { display:flex; gap: 3px; }
+.stone-dot {
+  width: 8px; height: 8px; border-radius: 4px;
+  border: 0.5px solid var(--charcoal);
+}
+.card-price { font-size: 14px; font-weight: 600; color: var(--charcoal); }
+
+/* Category card */
+.cat-card {
+  width: 150px; flex-shrink: 0;
+  aspect-ratio: 0.78; border-radius: 8px;
+  background-size: cover; background-position: center;
+  position:relative; overflow:hidden;
+  display:flex; align-items:flex-end; padding: 14px;
+  color: var(--parchment);
+}
+.cat-card::after {
+  content:''; position:absolute; inset:0;
+  background: linear-gradient(180deg, transparent 50%, rgba(14,12,10,0.7) 100%);
+}
+.cat-card .label {
+  position:relative; z-index:2;
+  font-family: 'Playfair Display', serif; font-size: 22px;
+}
+
+/* Stone swatches */
+.stone-row { display:flex; flex-wrap: wrap; gap: 6px; }
+.stone-pill {
+  display:flex; align-items:center; gap:8px;
+  padding: 6px 12px; border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 12px; color: var(--textSecondary);
+}
+.stone-pill.selected { border: 2px solid var(--charcoal); color: var(--charcoal); padding: 5px 11px; }
+.stone-pill .swatch {
+  width: 18px; height: 18px; border-radius: 9px;
+  border: 1px solid var(--border);
+}
+
+/* Bespoke block */
+.bespoke {
+  margin: 32px 16px;
+  background: var(--charcoal);
+  padding: 24px;
+  border-radius: 16px;
+  color: var(--parchment);
+}
+.bespoke h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px; font-weight: 500; line-height: 1.15;
+  margin-top: 8px;
+}
+.bespoke p { margin-top: 12px; font-size: 14px; opacity: 0.85; line-height: 1.5; }
+.bespoke .btn { margin-top: 24px; }
+.bespoke .eyebrow.light { color: var(--parchment); }
+
+/* Story block */
+.story p { margin-top: 12px; color: var(--textSecondary); font-size: 14px; line-height: 1.6; }
+.story .more {
+  margin-top: 16px;
+  font-size: 11px; font-weight: 600; letter-spacing: 1.6px; text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* Shop screen */
+.shop-header {
+  display:flex; justify-content: space-between; align-items: flex-end;
+  padding: 16px;
+}
+.shop-title { font-family: 'Playfair Display', serif; font-size: 32px; }
+.shop-bag {
+  width: 36px; height: 36px; border-radius: 18px; background: var(--cream);
+  display:flex; align-items:center; justify-content:center; color: var(--charcoal);
+}
+.chip-row {
+  display:flex; gap: 8px; padding: 0 16px 12px;
+  overflow-x: auto; scrollbar-width: none;
+}
+.chip-row::-webkit-scrollbar { display:none; }
+.chip {
+  white-space: nowrap;
+  padding: 8px 16px; border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 13px; color: var(--charcoal); background: transparent;
+}
+.chip.active { background: var(--charcoal); color: var(--parchment); border-color: var(--charcoal); }
+.grid2 {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px 12px;
+  padding: 12px 16px 100px;
+}
+
+/* Product detail */
+.pd-gallery {
+  width:100%; aspect-ratio: 1/1.2; background: var(--cream);
+  background-size: cover; background-position: center;
+  position:relative;
+}
+.pd-top {
+  position:absolute; top: 56px; left:0; right:0;
+  display:flex; justify-content: space-between; padding: 0 16px;
+}
+.pd-icon-btn {
+  width: 36px; height: 36px; border-radius: 18px;
+  background: rgba(245,240,230,0.95);
+  display:flex; align-items:center; justify-content:center;
+  color: var(--charcoal); font-size: 14px; font-weight: 600;
+}
+.pd-body { padding: 20px; }
+.pd-1of1 {
+  font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase;
+  color: var(--gold); font-weight: 500; margin-bottom: 8px;
+}
+.pd-name { font-family: 'Playfair Display', serif; font-size: 30px; line-height: 1.2; }
+.pd-price { font-size: 16px; font-weight: 600; color: var(--gold); margin-top: 8px; }
+.pd-desc { color: var(--textSecondary); margin-top: 16px; line-height: 1.6; font-size: 14px; }
+.pd-specs {
+  margin-top: 24px; padding-top: 16px;
+  border-top: 1px solid var(--border);
+  display:flex; flex-direction: column; gap: 16px;
+}
+.pd-spec-label {
+  font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase;
+  color: var(--textMuted); font-weight: 500; margin-bottom: 6px;
+}
+.pd-care {
+  margin-top: 24px; padding: 16px; border-radius: 8px;
+  background: var(--cream);
+}
+.pd-care p { margin-top: 8px; font-size: 14px; line-height: 1.5; color: var(--textSecondary); }
+.pd-shipping {
+  margin-top: 16px; font-size: 12px; color: var(--textMuted);
+}
+.pd-actionbar {
+  position:absolute; left:0; right:0; bottom:0;
+  background: var(--parchment);
+  border-top: 1px solid var(--border);
+  padding: 12px 16px 28px;
+  display:flex; gap: 8px; align-items: stretch;
+}
+.pd-actionbar .btn { flex:1; }
+.pd-wa {
+  width: 56px; height: 48px; border-radius: 4px;
+  background: #25D366; color: var(--parchment);
+  display:flex; align-items:center; justify-content:center;
+  font-size: 22px;
+}
+
+/* Cart */
+.cart-header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.cart-header .title { font-size: 16px; font-weight: 600; letter-spacing: 0.2px; }
+.cart-line {
+  display:flex; gap: 12px; padding: 16px;
+}
+.cart-img {
+  width: 80px; height: 100px; border-radius: 4px;
+  background: var(--cream); background-size: cover; background-position: center;
+}
+.cart-line-body {
+  flex:1; display:flex; flex-direction:column; justify-content:space-between;
+}
+.cart-line-name { font-size: 14px; font-weight: 500; line-height: 1.3; }
+.cart-line-price { font-size: 12px; color: var(--textMuted); margin-top: 2px; }
+.qty-control {
+  display:flex; align-items:center; gap: 8px;
+  border: 1px solid var(--border); border-radius: 999px;
+  padding: 4px 12px; font-size: 14px; font-weight: 500;
+  align-self: flex-start;
+}
+.cart-line-actions {
+  display:flex; justify-content:space-between; align-items:center;
+}
+.cart-remove { font-size: 12px; color: var(--textMuted); }
+.cart-summary {
+  position:absolute; left:0; right:0; bottom:0;
+  background: var(--parchment); border-top: 1px solid var(--border);
+  padding: 20px 16px 28px;
+}
+.cart-summary-row {
+  display:flex; justify-content:space-between; align-items:baseline;
+  margin-bottom: 4px;
+}
+.cart-summary-row .lbl { font-size: 14px; color: var(--textSecondary); font-weight: 500; }
+.cart-summary-row .val { font-family: 'Inter'; font-size: 18px; font-weight: 600; }
+.cart-shipping { font-size: 12px; color: var(--textMuted); margin-bottom: 16px; }
+
+/* Custom screen */
+.custom-body { padding: 56px 16px 100px; }
+.field { margin-top: 24px; }
+.field-label {
+  font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase;
+  color: var(--textMuted); font-weight: 500; margin-bottom: 10px;
+}
+.chip-wrap { display:flex; flex-wrap: wrap; gap: 8px; }
+.note-input {
+  min-height: 100px; padding: 14px;
+  border: 1px solid var(--border); border-radius: 8px;
+  font-family: inherit; font-size: 14px; color: var(--textMuted);
+  background: var(--parchment);
+}
+
+/* Account */
+.acc-tile {
+  background: var(--cream); border-radius: 8px; overflow: hidden;
+  margin-top: 8px;
+}
+.acc-row {
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 16px;
+}
+.acc-row + .acc-row { border-top: 0.5px solid var(--border); margin-left: 16px; }
+.acc-row-left { display:flex; align-items:center; gap: 12px; }
+.acc-row-icon { font-size: 20px; }
+.acc-row-icon.gold { color: var(--gold); }
+.acc-row-label { font-size: 14px; font-weight: 500; }
+.acc-row-sub { font-size: 12px; color: var(--textMuted); margin-top: 2px; }
+.acc-section { margin-top: 24px; }
+.acc-section-label {
+  font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase;
+  color: var(--textMuted); font-weight: 500; padding: 0 4px;
+}
+
+/* Footer note */
+.footer {
+  text-align: center; margin: 60px auto 0;
+  font-size: 12px; opacity: 0.5;
+}
+
+@media (max-width: 800px) {
+  .grid { gap: 40px; }
+  .phone { width: 320px; height: 700px; border-radius: 40px; border-width: 6px; }
+  .phone::before { width: 90px; height: 22px; top: 6px; }
+}
+</style>
+</head>
+<body>
+
+<div class="intro">
+  <div class="eyebrow" style="display:inline-flex">Atelier preview</div>
+  <h1>Tomer Dahan Jewelry</h1>
+  <p>1:1 visualization of all six core screens — same colors, typography, layouts and product imagery as the React Native app.</p>
+</div>
+
+<div class="grid">
+
+<!-- HOME -->
+<div class="phone-wrap">
+  <div class="phone">
+    <div class="screen">
+      <section class="hero">
+        <div class="hero-content">
+          <div class="hero-top">
+            <div class="brand-mark">TOMER DAHAN</div>
+            <div class="bag-btn">⌘<div class="bag-badge">2</div></div>
+          </div>
+          <div class="eyebrow light">Atelier</div>
+          <h1 class="hero-title">Pieces forged
+by hand.</h1>
+          <p class="hero-sub">One-of-a-kind beaded malas and statement jewelry, made stone by stone in the studio.</p>
+          <div class="hero-cta">
+            <span class="btn btn-gold">Explore the collection</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div class="eyebrow gold">New this month</div>
+          <h2 class="section-title">Latest releases</h2>
+        </div>
+        <div class="hscroll">
+          <div class="card">
+            <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&q=80')">
+              <div class="card-save">♡</div>
+              <div class="card-badge">1 / 1</div>
+            </div>
+            <div class="card-body">
+              <div class="card-name">Ruby Mala with Onyx Anchors</div>
+              <div class="card-meta">
+                <div class="card-stones">
+                  <div class="stone-dot" style="background:var(--ruby)"></div>
+                  <div class="stone-dot" style="background:var(--onyx)"></div>
+                </div>
+                <div class="card-price">$890</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=400&q=80')">
+              <div class="card-save">♡</div>
+            </div>
+            <div class="card-body">
+              <div class="card-name">Sapphire Double Wrap</div>
+              <div class="card-meta">
+                <div class="card-stones">
+                  <div class="stone-dot" style="background:var(--sapphire)"></div>
+                </div>
+                <div class="card-price">$420</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=400&q=80')">
+              <div class="card-save">♡</div>
+            </div>
+            <div class="card-body">
+              <div class="card-name">Garnet Monolith Ring</div>
+              <div class="card-meta">
+                <div class="card-stones">
+                  <div class="stone-dot" style="background:var(--garnet)"></div>
+                </div>
+                <div class="card-price">$320</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div class="eyebrow gold">Browse</div>
+          <h2 class="section-title">By category</h2>
+        </div>
+        <div class="hscroll">
+          <div class="cat-card" style="background-image:url('https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&q=80')">
+            <div class="label">Mala Beads</div>
+          </div>
+          <div class="cat-card" style="background-image:url('https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=400&q=80')">
+            <div class="label">Necklaces</div>
+          </div>
+          <div class="cat-card" style="background-image:url('https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=400&q=80')">
+            <div class="label">Bracelets</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div class="eyebrow gold">Stones</div>
+          <h2 class="section-title">Choose your gem</h2>
+        </div>
+        <div class="stone-row">
+          <div class="stone-pill"><span class="swatch" style="background:var(--ruby)"></span>Ruby</div>
+          <div class="stone-pill"><span class="swatch" style="background:var(--emerald)"></span>Emerald</div>
+          <div class="stone-pill"><span class="swatch" style="background:var(--sapphire)"></span>Sapphire</div>
+          <div class="stone-pill"><span class="swatch" style="background:var(--onyx)"></span>Onyx</div>
+          <div class="stone-pill"><span class="swatch" style="background:var(--tigerEye)"></span>Tiger's Eye</div>
+          <div class="stone-pill"><span class="swatch" style="background:var(--turquoise)"></span>Turquoise</div>
+        </div>
+      </section>
+
+      <div class="bespoke">
+        <div class="eyebrow light">Bespoke</div>
+        <h2>Made for you.</h2>
+        <p>Every piece begins as a conversation. Tell me about the stones you love, the length you wear, the meaning behind the piece — and I will build it.</p>
+        <span class="btn btn-gold">Begin a custom piece</span>
+      </div>
+
+      <section class="section story" style="padding-bottom: 120px">
+        <div class="eyebrow gold">The maker</div>
+        <h2 class="section-title">A studio in Tel Aviv.</h2>
+        <p>Tomer Dahan has been threading gemstones for over a decade — natural ruby, emerald, sapphire and onyx, set with hand-finished gold and oxidized silver. Each mala is strung individually; no two pieces are identical.</p>
+        <div class="more">Read more  →</div>
+      </section>
+    </div>
+
+    <div class="tabbar">
+      <div class="tab active"><div class="tab-icon">◇</div><div class="tab-label">Home</div></div>
+      <div class="tab"><div class="tab-icon">▦</div><div class="tab-label">Shop</div></div>
+      <div class="tab"><div class="tab-icon">✦</div><div class="tab-label">Custom</div></div>
+      <div class="tab"><div class="tab-icon">♡</div><div class="tab-label">Saved</div></div>
+      <div class="tab"><div class="tab-icon">◯</div><div class="tab-label">Account</div></div>
+    </div>
+  </div>
+  <div class="phone-label">Home</div>
+</div>
+
+<!-- SHOP -->
+<div class="phone-wrap">
+  <div class="phone">
+    <div class="screen">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="shop-header">
+        <div>
+          <div class="eyebrow gold">THE COLLECTION</div>
+          <div class="shop-title">The Collection</div>
+        </div>
+        <div class="shop-bag">⌘</div>
+      </div>
+      <div class="chip-row">
+        <div class="chip">All</div>
+        <div class="chip active">Mala Beads</div>
+        <div class="chip">Necklaces</div>
+        <div class="chip">Bracelets</div>
+        <div class="chip">Rings</div>
+      </div>
+      <div class="chip-row">
+        <div class="stone-pill"><span class="swatch" style="background:var(--ruby)"></span>Ruby</div>
+        <div class="stone-pill selected"><span class="swatch" style="background:var(--emerald)"></span>Emerald</div>
+        <div class="stone-pill"><span class="swatch" style="background:var(--sapphire)"></span>Sapphire</div>
+        <div class="stone-pill"><span class="swatch" style="background:var(--onyx)"></span>Onyx</div>
+      </div>
+      <div class="grid2">
+        <div class="card" style="width:auto">
+          <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=400&q=80')">
+            <div class="card-save">♡</div>
+            <div class="card-badge">1 / 1</div>
+          </div>
+          <div class="card-body">
+            <div class="card-name">Emerald Strand</div>
+            <div class="card-meta">
+              <div class="card-stones"><div class="stone-dot" style="background:var(--emerald)"></div></div>
+              <div class="card-price">$1,240</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="width:auto">
+          <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1635767582909-345e0a4cc44a?w=400&q=80')">
+            <div class="card-save">♡</div>
+            <div class="card-badge">1 / 1</div>
+          </div>
+          <div class="card-body">
+            <div class="card-name">Mixed Stone Mala</div>
+            <div class="card-meta">
+              <div class="card-stones">
+                <div class="stone-dot" style="background:var(--ruby)"></div>
+                <div class="stone-dot" style="background:var(--emerald)"></div>
+                <div class="stone-dot" style="background:var(--sapphire)"></div>
+              </div>
+              <div class="card-price">$1,680</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="width:auto">
+          <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&q=80')">
+            <div class="card-save">♡</div>
+          </div>
+          <div class="card-body">
+            <div class="card-name">Ruby Mala</div>
+            <div class="card-meta">
+              <div class="card-stones">
+                <div class="stone-dot" style="background:var(--ruby)"></div>
+                <div class="stone-dot" style="background:var(--onyx)"></div>
+              </div>
+              <div class="card-price">$890</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="width:auto">
+          <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1535556261540-c3bae84d2c8d?w=400&q=80')">
+            <div class="card-save">♡</div>
+          </div>
+          <div class="card-body">
+            <div class="card-name">Tiger's Eye Mala</div>
+            <div class="card-meta">
+              <div class="card-stones">
+                <div class="stone-dot" style="background:var(--tigerEye)"></div>
+                <div class="stone-dot" style="background:var(--onyx)"></div>
+              </div>
+              <div class="card-price">$540</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tabbar">
+      <div class="tab"><div class="tab-icon">◇</div><div class="tab-label">Home</div></div>
+      <div class="tab active"><div class="tab-icon">▦</div><div class="tab-label">Shop</div></div>
+      <div class="tab"><div class="tab-icon">✦</div><div class="tab-label">Custom</div></div>
+      <div class="tab"><div class="tab-icon">♡</div><div class="tab-label">Saved</div></div>
+      <div class="tab"><div class="tab-icon">◯</div><div class="tab-label">Account</div></div>
+    </div>
+  </div>
+  <div class="phone-label">Shop · Filtered by Emerald</div>
+</div>
+
+<!-- PRODUCT DETAIL -->
+<div class="phone-wrap">
+  <div class="phone">
+    <div class="screen">
+      <div class="pd-gallery" style="background-image:url('https://images.unsplash.com/photo-1635767582909-345e0a4cc44a?w=600&q=85')">
+        <div class="pd-top">
+          <div class="pd-icon-btn">‹</div>
+          <div class="pd-icon-btn" style="color:var(--gold)">♥</div>
+        </div>
+      </div>
+      <div class="pd-body" style="padding-bottom: 100px">
+        <div class="pd-1of1">One of a kind</div>
+        <div class="pd-name">Mixed Stone Mala</div>
+        <div class="pd-price">$1,680</div>
+        <p class="pd-desc">A peacock-pattern mala — alternating ruby, emerald and sapphire beads with a hand-hammered 18k bead. The studio centerpiece.</p>
+
+        <div class="pd-specs">
+          <div>
+            <div class="pd-spec-label">Stones</div>
+            <div class="stone-row">
+              <div class="stone-pill"><span class="swatch" style="background:var(--ruby)"></span>Ruby</div>
+              <div class="stone-pill"><span class="swatch" style="background:var(--emerald)"></span>Emerald</div>
+              <div class="stone-pill"><span class="swatch" style="background:var(--sapphire)"></span>Sapphire</div>
+            </div>
+          </div>
+          <div>
+            <div class="pd-spec-label">Length</div>
+            <div style="font-size:14px">84 cm</div>
+          </div>
+          <div>
+            <div class="pd-spec-label">Metal</div>
+            <div style="font-size:14px">18k Gold</div>
+          </div>
+        </div>
+
+        <div class="pd-care">
+          <div class="eyebrow gold">Care</div>
+          <p>Hand-knotted on natural silk. Avoid water and perfume. Polish gold elements with a soft cotton cloth.</p>
+        </div>
+
+        <div class="pd-shipping">Ships worldwide from Tel Aviv</div>
+      </div>
+    </div>
+    <div class="pd-actionbar">
+      <span class="btn btn-primary">Add to bag</span>
+      <div class="pd-wa">⌬</div>
+    </div>
+  </div>
+  <div class="phone-label">Product Detail</div>
+</div>
+
+<!-- CUSTOM -->
+<div class="phone-wrap">
+  <div class="phone">
+    <div class="screen">
+      <div class="custom-body">
+        <div class="eyebrow gold">Bespoke</div>
+        <h1 style="font-family:'Playfair Display',serif; font-size:32px; margin-top:8px">A piece of your own.</h1>
+        <p style="margin-top:14px; color:var(--textSecondary); line-height:1.6; font-size:14px">Share what you have in mind — stones, length, occasion. I will reply within 48 hours.</p>
+
+        <div class="field">
+          <div class="field-label">Type of piece</div>
+          <div class="chip-wrap">
+            <div class="chip active">Mala Beads</div>
+            <div class="chip">Necklaces</div>
+            <div class="chip">Bracelets</div>
+            <div class="chip">Rings</div>
+            <div class="chip">Pendants</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="field-label">Preferred stones</div>
+          <div class="stone-row">
+            <div class="stone-pill selected"><span class="swatch" style="background:var(--ruby)"></span>Ruby</div>
+            <div class="stone-pill selected"><span class="swatch" style="background:var(--emerald)"></span>Emerald</div>
+            <div class="stone-pill"><span class="swatch" style="background:var(--sapphire)"></span>Sapphire</div>
+            <div class="stone-pill"><span class="swatch" style="background:var(--onyx)"></span>Onyx</div>
+            <div class="stone-pill"><span class="swatch" style="background:var(--tigerEye)"></span>Tiger's Eye</div>
+            <div class="stone-pill"><span class="swatch" style="background:var(--lapis)"></span>Lapis</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="field-label">Anything else</div>
+          <div class="note-input">Inspiration, dimensions, who it is for…</div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap: 10px; margin-top: 28px">
+          <span class="btn btn-primary btn-block">Continue on WhatsApp</span>
+          <span class="btn btn-secondary btn-block">Send by email</span>
+        </div>
+      </div>
+    </div>
+    <div class="tabbar">
+      <div class="tab"><div class="tab-icon">◇</div><div class="tab-label">Home</div></div>
+      <div class="tab"><div class="tab-icon">▦</div><div class="tab-label">Shop</div></div>
+      <div class="tab active"><div class="tab-icon">✦</div><div class="tab-label">Custom</div></div>
+      <div class="tab"><div class="tab-icon">♡</div><div class="tab-label">Saved</div></div>
+      <div class="tab"><div class="tab-icon">◯</div><div class="tab-label">Account</div></div>
+    </div>
+  </div>
+  <div class="phone-label">Custom Order</div>
+</div>
+
+<!-- CART -->
+<div class="phone-wrap">
+  <div class="phone">
+    <div class="screen">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="cart-header">
+        <div style="font-size:24px">×</div>
+        <div class="title">Your Bag</div>
+        <div style="width:24px"></div>
+      </div>
+      <div class="cart-line">
+        <div class="cart-img" style="background-image:url('https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&q=80')"></div>
+        <div class="cart-line-body">
+          <div>
+            <div class="cart-line-name">Ruby Mala with Onyx Anchors</div>
+            <div class="cart-line-price">$890</div>
+          </div>
+          <div class="cart-line-actions">
+            <div class="qty-control">− 1 +</div>
+            <div class="cart-remove">Remove</div>
+          </div>
+        </div>
+      </div>
+      <div class="cart-line" style="border-top:1px solid var(--divider)">
+        <div class="cart-img" style="background-image:url('https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=400&q=80')"></div>
+        <div class="cart-line-body">
+          <div>
+            <div class="cart-line-name">Garnet Monolith Ring</div>
+            <div class="cart-line-price">$320</div>
+          </div>
+          <div class="cart-line-actions">
+            <div class="qty-control">− 1 +</div>
+            <div class="cart-remove">Remove</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cart-summary">
+      <div class="cart-summary-row">
+        <span class="lbl">Subtotal</span>
+        <span class="val">$1,210</span>
+      </div>
+      <div class="cart-shipping">Shipping calculated at checkout</div>
+      <span class="btn btn-primary btn-block">Reserve via WhatsApp</span>
+    </div>
+  </div>
+  <div class="phone-label">Bag (modal)</div>
+</div>
+
+<!-- ACCOUNT -->
+<div class="phone-wrap">
+  <div class="phone">
+    <div class="screen">
+      <div class="custom-body" style="padding-top: 60px">
+        <div class="eyebrow gold">ACCOUNT</div>
+        <h1 style="font-family:'Playfair Display',serif; font-size:32px; margin-top:6px">Account</h1>
+
+        <div class="acc-section">
+          <div class="acc-section-label">Contact the studio</div>
+          <div class="acc-tile">
+            <div class="acc-row">
+              <div class="acc-row-left">
+                <div class="acc-row-icon gold">⌬</div>
+                <div>
+                  <div class="acc-row-label">WhatsApp</div>
+                  <div class="acc-row-sub">+972-54-8167131</div>
+                </div>
+              </div>
+              <div style="color:var(--textMuted)">›</div>
+            </div>
+            <div class="acc-row">
+              <div class="acc-row-left">
+                <div class="acc-row-icon">✉</div>
+                <div>
+                  <div class="acc-row-label">Email</div>
+                  <div class="acc-row-sub">dahanTomer12@gmail.com</div>
+                </div>
+              </div>
+              <div style="color:var(--textMuted)">›</div>
+            </div>
+            <div class="acc-row">
+              <div class="acc-row-left">
+                <div class="acc-row-icon">◉</div>
+                <div>
+                  <div class="acc-row-label">Instagram</div>
+                  <div class="acc-row-sub">@tomerdahanjewelry</div>
+                </div>
+              </div>
+              <div style="color:var(--textMuted)">›</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc-section">
+          <div class="acc-tile">
+            <div class="acc-row">
+              <div class="acc-row-left">
+                <div class="acc-row-icon">ⓘ</div>
+                <div class="acc-row-label">About the maker</div>
+              </div>
+              <div style="color:var(--textMuted)">›</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc-section">
+          <div class="acc-section-label">Language</div>
+          <div class="acc-tile">
+            <div class="acc-row">
+              <div class="acc-row-label">English</div>
+              <div style="color:var(--gold); font-size:18px">✓</div>
+            </div>
+            <div class="acc-row">
+              <div class="acc-row-label">עברית</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tabbar">
+      <div class="tab"><div class="tab-icon">◇</div><div class="tab-label">Home</div></div>
+      <div class="tab"><div class="tab-icon">▦</div><div class="tab-label">Shop</div></div>
+      <div class="tab"><div class="tab-icon">✦</div><div class="tab-label">Custom</div></div>
+      <div class="tab"><div class="tab-icon">♡</div><div class="tab-label">Saved</div></div>
+      <div class="tab active"><div class="tab-icon">◯</div><div class="tab-label">Account</div></div>
+    </div>
+  </div>
+  <div class="phone-label">Account</div>
+</div>
+
+</div>
+
+<div class="footer">
+  Static HTML preview. The real app is React Native + Expo and lives in <code>/app</code> and <code>/src</code>.
+</div>
+
+</body>
+</html>
