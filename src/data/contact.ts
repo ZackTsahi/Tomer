@@ -2,8 +2,7 @@
 // channels — verify and update before shipping to production.
 export const contact = {
   email: 'dahanTomer12@gmail.com',
-  // Replace with the studio's verified WhatsApp number (E.164, no spaces).
-  whatsappNumber: '+972000000000',
+  whatsappNumber: '+972548167131',
   instagramHandle: 'tomerdahanjewelry',
   instagramUrl: 'https://www.instagram.com/tomerdahanjewelry/',
   studioCity: 'Tel Aviv',
