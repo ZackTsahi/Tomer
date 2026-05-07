@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Dimensions,
+  Linking,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -16,12 +17,16 @@ import { Button } from '@/components/Button';
 import { Eyebrow } from '@/components/Eyebrow';
 import { ProductCard } from '@/components/ProductCard';
 import { CategoryCard } from '@/components/CategoryCard';
+import { GalleryCard } from '@/components/GalleryCard';
+import { SectionHeader } from '@/components/SectionHeader';
 import { StoneSwatch } from '@/components/StoneSwatch';
-import { useT } from '@/i18n/I18nProvider';
+import { useI18n, useT } from '@/i18n/I18nProvider';
 import { useCart } from '@/state/CartContext';
 import { getFeaturedProducts, getNewProducts } from '@/data/products';
 import { categoryOrder } from '@/data/categories';
 import { allStones } from '@/data/stones';
+import { galleryItems } from '@/data/gallery';
+import { whatsappLink } from '@/data/contact';
 import { colors, spacing, typography } from '@/theme';
 
 const HERO_IMAGE =
@@ -31,11 +36,20 @@ export default function HomeScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const t = useT();
+  const { locale } = useI18n();
   const cart = useCart();
   const featured = getFeaturedProducts();
   const fresh = getNewProducts();
   const screenWidth = Dimensions.get('window').width;
   const cardWidth = (screenWidth - spacing.base * 2 - spacing.md) / 2;
+  const galleryPreview = galleryItems
+    .filter((g) => g.tags.includes('featured'))
+    .slice(0, 4);
+
+  const openWhatsApp = async () => {
+    const url = whatsappLink(locale === 'he' ? 'שלום תומר!' : 'Hi Tomer!');
+    if (await Linking.canOpenURL(url)) Linking.openURL(url);
+  };
 
   return (
     <ScrollView
@@ -156,6 +170,26 @@ export default function HomeScreen() {
         ) : null}
       </View>
 
+      {/* Gallery preview */}
+      <View style={styles.section}>
+        <SectionHeader
+          eyebrow={t.gallery.eyebrow}
+          title={t.gallery.title}
+          trailingLabel={t.common.viewAll}
+          onTrailingPress={() => router.push('/(tabs)/gallery')}
+        />
+        <View style={styles.galleryGrid}>
+          {galleryPreview.map((g) => (
+            <GalleryCard
+              key={g.id}
+              item={g}
+              width={cardWidth}
+              onPress={() => router.push('/(tabs)/gallery')}
+            />
+          ))}
+        </View>
+      </View>
+
       {/* Bespoke / custom */}
       <View style={styles.bespoke}>
         <Eyebrow label={t.home.customEyebrow} variant="light" />
@@ -170,13 +204,25 @@ export default function HomeScreen() {
         >
           {t.home.customBody}
         </Text>
-        <Button
-          label={t.home.customCta}
-          variant="gold"
-          size="lg"
-          onPress={() => router.push('/(tabs)/custom')}
-          style={{ marginTop: spacing.xl, alignSelf: 'flex-start' }}
-        />
+        <View style={styles.bespokeCtas}>
+          <Button
+            label={t.home.customCta}
+            variant="gold"
+            size="lg"
+            onPress={() => router.push('/(tabs)/custom')}
+          />
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel={t.contact.whatsapp}
+            onPress={openWhatsApp}
+            style={({ pressed }) => [styles.whatsappLink, pressed && { opacity: 0.7 }]}
+          >
+            <Ionicons name="logo-whatsapp" size={18} color={colors.whatsapp} />
+            <Text style={[typography.button, { color: colors.parchment }]}>
+              {t.contact.whatsappCta}
+            </Text>
+          </Pressable>
+        </View>
       </View>
 
       {/* Maker story */}
@@ -290,5 +336,23 @@ const styles = StyleSheet.create({
     borderColor: colors.gold,
     padding: spacing.xl,
     borderRadius: 4,
+  },
+  bespokeCtas: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: spacing.lg,
+    marginTop: spacing.xl,
+  },
+  whatsappLink: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    paddingVertical: spacing.sm,
+  },
+  galleryGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: spacing.md,
   },
 });

@@ -65,16 +65,28 @@ export default function AccountScreen() {
             sublabel={`@${contact.instagramHandle}`}
             onPress={openInstagram}
           />
+          <Divider />
+          <Row
+            icon="paper-plane-outline"
+            label={t.contact.title}
+            onPress={() => router.push('/contact')}
+          />
         </View>
       </View>
 
-      {/* About */}
+      {/* About + Saved */}
       <View style={styles.section}>
         <View style={styles.tile}>
           <Row
             icon="information-circle-outline"
             label={t.account.about}
             onPress={() => router.push('/about')}
+          />
+          <Divider />
+          <Row
+            icon="bookmark-outline"
+            label={t.saved.title}
+            onPress={() => router.push('/(tabs)/saved')}
           />
         </View>
       </View>

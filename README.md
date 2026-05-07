@@ -32,20 +32,23 @@ app/                        expo-router file-based routes
 ├── _layout.tsx             Root providers (i18n, cart, saved) + Stack
 ├── (tabs)/
 │   ├── _layout.tsx         Bottom tabs
-│   ├── index.tsx           Home (hero, new releases, categories, stones, story)
+│   ├── index.tsx           Home (hero, new releases, categories, stones, gallery, story)
 │   ├── shop.tsx            Catalog grid + category & stone filters
+│   ├── gallery.tsx         Editorial masonry feed with category / theme filters
 │   ├── custom.tsx          Bespoke commission flow → WhatsApp / email
-│   ├── saved.tsx           Saved pieces (wishlist)
-│   └── account.tsx         Contact, about, language toggle
+│   ├── saved.tsx           Saved pieces (wishlist, reachable from Account)
+│   └── account.tsx         Contact entry, about, language toggle, saved
 ├── product/[slug].tsx      Product detail (gallery, specs, add-to-bag, ask-on-WhatsApp)
 ├── cart.tsx                Bag (modal) → reserve via WhatsApp
+├── contact.tsx             Studio contact tiles — WhatsApp, email, Instagram, phone
 └── about.tsx               Maker story
 
 src/
 ├── theme/                  Colors, typography (serif + sans), spacing, elevation
 ├── i18n/                   EN/HE strings + I18nProvider
-├── components/             Button, ProductCard, CategoryCard, StoneSwatch, Chip, Eyebrow, SectionHeader
-├── data/                   products, categories, stones, contact (WhatsApp / email helpers)
+├── components/             Button (alias: LuxuryButton), AppHeader, SectionHeader,
+│                           ProductCard, GalleryCard, CategoryCard, StoneSwatch, Chip, Eyebrow
+├── data/                   products, gallery, categories, stones, contact (WhatsApp / email helpers)
 ├── state/                  CartContext, SavedContext (in-memory, easy to swap for AsyncStorage / server)
 ├── types/                  Product domain types
 └── utils/                  Currency / length formatting
@@ -90,6 +93,22 @@ sideloaded directly.
 
 For a Play Store upload, use the `production` profile instead, which builds
 an `.aab`.
+
+## Data layer
+
+The app ships with two curated mock datasets so it looks rich on day one,
+with no Instagram scraping at runtime:
+
+- `src/data/products.ts` — product SKUs (rings, necklaces, bracelets, pendants,
+  Magen David, hamsa, engagement, earrings) including stones, metal, price,
+  bilingual name + description, and one-of-a-kind / featured flags.
+- `src/data/gallery.ts` — editorial gallery entries with masonry-friendly
+  aspect ratios, bilingual captions, and theme tags (`featured`, `gemstone`,
+  `custom`) that drive the Gallery screen's filter chips.
+
+Both modules expose plain functions (`getFeaturedProducts`, `filterGallery`,
+etc.) so swapping the source to a CMS, Supabase, Firebase or the Instagram
+Graph API is a one-file change.
 
 ## Before shipping
 

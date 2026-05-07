@@ -10,6 +10,7 @@ export const strings = {
     nav: {
       home: 'Home',
       shop: 'Shop',
+      gallery: 'Gallery',
       custom: 'Custom',
       saved: 'Saved',
       account: 'Account',
@@ -43,6 +44,30 @@ export const strings = {
       filterStone: 'Stone',
       empty: 'No pieces match these filters.',
       clearFilters: 'Clear filters',
+    },
+    gallery: {
+      title: 'Gallery',
+      eyebrow: 'The feed',
+      subtitle:
+        'A curated look inside the studio — finished pieces, work in progress, and one-of-a-kind commissions.',
+      empty: 'Nothing here yet under this filter.',
+      openInstagram: 'Follow on Instagram',
+    },
+    contact: {
+      title: 'Contact',
+      eyebrow: 'Reach the studio',
+      subtitle:
+        'The fastest reply is on WhatsApp. Pieces are shipped worldwide from Tel Aviv.',
+      whatsapp: 'WhatsApp',
+      whatsappCta: 'Open WhatsApp',
+      email: 'Email',
+      emailCta: 'Send an email',
+      instagram: 'Instagram',
+      instagramCta: 'Open Instagram',
+      phone: 'Studio phone',
+      phoneCta: 'Call the studio',
+      hours: 'By appointment · Tel Aviv',
+      replyTime: 'Replies within 48 hours.',
     },
     product: {
       addToCart: 'Add to bag',
@@ -101,6 +126,7 @@ export const strings = {
       from: 'from',
       currency: '$',
       readMore: 'Read more',
+      viewAll: 'View all',
       sendMessage: 'Send a message',
       close: 'Close',
     },
@@ -112,6 +138,7 @@ export const strings = {
     nav: {
       home: 'בית',
       shop: 'חנות',
+      gallery: 'גלריה',
       custom: 'בהזמנה',
       saved: 'שמורים',
       account: 'חשבון',
@@ -145,6 +172,30 @@ export const strings = {
       filterStone: 'אבן',
       empty: 'לא נמצאו פריטים מתאימים.',
       clearFilters: 'נקה סינון',
+    },
+    gallery: {
+      title: 'גלריה',
+      eyebrow: 'הפיד',
+      subtitle:
+        'מבט אוצר אל תוך הסטודיו — פריטים גמורים, עבודה בתהליך, והזמנות ייחודיות.',
+      empty: 'אין כאן כלום כרגע תחת הסינון הזה.',
+      openInstagram: 'עקבו באינסטגרם',
+    },
+    contact: {
+      title: 'צור קשר',
+      eyebrow: 'הסטודיו',
+      subtitle:
+        'התשובה המהירה ביותר היא בוואטסאפ. משלוחים לכל העולם מתל אביב.',
+      whatsapp: 'וואטסאפ',
+      whatsappCta: 'פתח וואטסאפ',
+      email: 'אימייל',
+      emailCta: 'שלח אימייל',
+      instagram: 'אינסטגרם',
+      instagramCta: 'פתח אינסטגרם',
+      phone: 'טלפון הסטודיו',
+      phoneCta: 'התקשר לסטודיו',
+      hours: 'בתיאום מראש · תל אביב',
+      replyTime: 'תגובה תוך 48 שעות.',
     },
     product: {
       addToCart: 'הוסף לסל',
@@ -202,10 +253,11 @@ export const strings = {
       from: 'החל מ-',
       currency: '₪',
       readMore: 'קרא עוד',
+      viewAll: 'הצג הכל',
       sendMessage: 'שלח הודעה',
       close: 'סגור',
     },
   },
 } as const;
 
-export type Strings = (typeof strings)['en'];
+export type Strings = (typeof strings)[Locale];
