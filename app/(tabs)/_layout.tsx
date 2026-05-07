@@ -61,6 +61,15 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="gallery"
+        options={{
+          title: t.nav.gallery,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="images-outline" size={size - 2} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="custom"
         options={{
           title: t.nav.custom,
@@ -73,6 +82,7 @@ export default function TabsLayout() {
         name="saved"
         options={{
           title: t.nav.saved,
+          href: null,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="bookmark-outline" size={size - 2} color={color} />
           ),

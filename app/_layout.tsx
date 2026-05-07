@@ -42,6 +42,7 @@ export default function RootLayout() {
                 />
                 <Stack.Screen name="cart" options={{ presentation: 'modal' }} />
                 <Stack.Screen name="about" />
+                <Stack.Screen name="contact" />
               </Stack>
             </CartProvider>
           </SavedProvider>
