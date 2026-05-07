@@ -78,21 +78,49 @@ Fonts (Playfair Display + Inter) are loaded automatically from
 ## Build an Android APK
 
 The repo is configured for [EAS Build](https://docs.expo.dev/build/introduction/)
-so you can produce a downloadable APK from the cloud — no Android SDK needed.
+so you can produce a downloadable APK from the cloud — no Android SDK or
+Java toolchain needed locally.
+
+`eas.json` ships three profiles:
+
+| Profile       | Output       | Use it for                                  |
+| ------------- | ------------ | ------------------------------------------- |
+| `preview`     | **APK**      | Sideload onto any Android phone for review. |
+| `production`  | `.aab`       | Google Play Store upload.                   |
+| `development` | APK (devClient) | Local Expo Dev Client builds.            |
+
+### One-time setup
 
 ```sh
-npm install -g eas-cli           # one time
-eas login                        # uses your free Expo account
-eas build --platform android --profile preview
+npm install -g eas-cli   # global CLI
+eas login                # uses your free Expo account
 ```
 
-When the build finishes (~10–15 min), the CLI prints a URL where the APK can
-be downloaded and installed on any Android device. The `preview` profile in
-`eas.json` is configured to produce an APK (rather than an AAB) so it can be
-sideloaded directly.
+If this is the first build for the project, also run `eas init` once so EAS
+links the local `app.json` to a project on your Expo account.
 
-For a Play Store upload, use the `production` profile instead, which builds
-an `.aab`.
+### Generate an installable APK
+
+```sh
+# from the repo root
+npm install                # make sure deps are in sync
+npx tsc --noEmit           # sanity check (no errors)
+npx expo-doctor            # confirm SDK / dependency alignment
+eas build -p android --profile preview
+```
+
+EAS uploads the project, runs the build on its cloud workers (~10–15 min on
+the free tier), then prints a URL where the `.apk` file can be downloaded.
+Transfer it to an Android device and install it directly — Play Store not
+required.
+
+### Build for the Play Store
+
+```sh
+eas build -p android --profile production
+```
+
+This produces an Android App Bundle (`.aab`) suitable for the Play Console.
 
 ## Data layer
 
