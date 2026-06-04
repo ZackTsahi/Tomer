@@ -1,0 +1,14 @@
+{
+  "_comment": "Offline test data captured from broker screenshots on 2026-06-04 13:10 ET. Use with --fixture to run the agent without hitting Yahoo. Prices are USD per share; prev_close is the previous regular-session close. fx is a placeholder USD/ILS rate (the broker used a different display rate, so absolute ILS values here won't match the broker, but daily %, P/L %, and weights will).",
+  "fx": { "ILS=X": 3.65 },
+  "quotes": {
+    "ASML": { "price": 1748.14, "prev_close": 1726.36, "currency": "USD" },
+    "CRDO": { "price": 225.21,  "prev_close": 214.60,  "currency": "USD" },
+    "AVGO": { "price": 418.12,  "prev_close": 479.23,  "currency": "USD" },
+    "ASTS": { "price": 108.16,  "prev_close": 107.73,  "currency": "USD" },
+    "TSM":  { "price": 443.50,  "prev_close": 437.12,  "currency": "USD" },
+    "NBIS": { "price": 253.62,  "prev_close": 251.68,  "currency": "USD" },
+    "IREN": { "price": 61.58,   "prev_close": 65.48,   "currency": "USD" },
+    "AAOI": { "price": 194.08,  "prev_close": 184.07,  "currency": "USD" }
+  }
+}

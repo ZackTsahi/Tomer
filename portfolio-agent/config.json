@@ -1,0 +1,20 @@
+{
+  "_comment": "Thresholds for the risk and alerts commands. Tune freely. Percentages are whole numbers (5 = 5%).",
+
+  "risk": {
+    "single_position_max_pct": 15,
+    "sector_concentration_max_pct": 40,
+    "theme_concentration_max_pct": 60,
+    "drawdown_from_cost_pct": 10
+  },
+
+  "alerts": {
+    "daily_move_pct": 5,
+    "price_levels": [
+      { "ticker": "AVGO", "direction": "below", "level": 400, "note": "watch the gap-down" },
+      { "ticker": "IREN", "direction": "below", "level": 55.88, "note": "back to my cost basis" },
+      { "ticker": "ASML", "direction": "above", "level": 1800, "note": "trim candidate" },
+      { "ticker": "NBIS", "direction": "above", "level": 280, "note": "take-profit zone" }
+    ]
+  }
+}

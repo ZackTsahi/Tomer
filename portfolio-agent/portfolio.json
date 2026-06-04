@@ -1,0 +1,15 @@
+{
+  "_comment": "Edit your holdings here, not the code. shares = number of shares; avg_cost = your average buy price PER SHARE in cost_currency. base_currency is the currency you think in (display). The 9th broker line (cash / other position) is not yet listed — add it as another holding object when you have it.",
+  "base_currency": "ILS",
+  "fx_symbol": "ILS=X",
+  "holdings": [
+    { "ticker": "ASML", "name": "ASML Holding NV",            "shares": 6,  "avg_cost": 1412.39, "cost_currency": "USD", "sector": "Semiconductor Equipment",   "theme": "Semis & AI Infra" },
+    { "ticker": "CRDO", "name": "Credo Technology",           "shares": 30, "avg_cost": 208.98,  "cost_currency": "USD", "sector": "Semiconductors",            "theme": "Semis & AI Infra" },
+    { "ticker": "AVGO", "name": "Broadcom",                   "shares": 13, "avg_cost": 333.05,  "cost_currency": "USD", "sector": "Semiconductors",            "theme": "Semis & AI Infra" },
+    { "ticker": "ASTS", "name": "AST SpaceMobile",            "shares": 48, "avg_cost": 80.86,   "cost_currency": "USD", "sector": "Telecom / Space",           "theme": "Other" },
+    { "ticker": "TSM",  "name": "Taiwan Semiconductor",       "shares": 10, "avg_cost": 343.21,  "cost_currency": "USD", "sector": "Semiconductors",            "theme": "Semis & AI Infra" },
+    { "ticker": "NBIS", "name": "Nebius Group",               "shares": 16, "avg_cost": 153.08,  "cost_currency": "USD", "sector": "AI Infrastructure / Cloud", "theme": "Semis & AI Infra" },
+    { "ticker": "IREN", "name": "IREN Ltd",                   "shares": 63, "avg_cost": 55.88,   "cost_currency": "USD", "sector": "AI Infrastructure / Data Centers", "theme": "Semis & AI Infra" },
+    { "ticker": "AAOI", "name": "Applied Optoelectronics",    "shares": 19, "avg_cost": 166.21,  "cost_currency": "USD", "sector": "Semiconductors",            "theme": "Semis & AI Infra" }
+  ]
+}
