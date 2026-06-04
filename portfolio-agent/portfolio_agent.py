@@ -47,6 +47,7 @@ class Position:
     price: float             # USD per share, current
     prev_close: float        # USD per share, previous regular-session close
     currency: str            # native quote currency, expected "USD"
+    target_weight: float = 0.0  # desired % of portfolio (0 = not set)
 
     @property
     def daily_pct(self) -> float:
@@ -174,6 +175,70 @@ def load_fixture(path: str) -> tuple[dict, float]:
     return data.get("quotes", {}), fx
 
 
+def _coerce_earnings_date(calendar) -> str | None:
+    """yfinance returns the next earnings date in a few shapes across versions."""
+    if not calendar:
+        return None
+    value = None
+    if isinstance(calendar, dict):
+        value = calendar.get("Earnings Date") or calendar.get("earningsDate")
+        if isinstance(value, (list, tuple)) and value:
+            value = value[0]
+    if value is None:
+        return None
+    try:
+        return value.strftime("%Y-%m-%d")
+    except AttributeError:
+        return str(value)[:10]
+
+
+def _normalize_news(raw_items, limit: int) -> list[dict]:
+    """Flatten yfinance news items (the schema changed: newer wraps in 'content')."""
+    out: list[dict] = []
+    for item in (raw_items or [])[: max(limit * 2, limit)]:
+        content = item.get("content", item) if isinstance(item, dict) else {}
+        title = content.get("title") or item.get("title")
+        if not title:
+            continue
+        publisher = (
+            (content.get("provider") or {}).get("displayName")
+            if isinstance(content.get("provider"), dict)
+            else item.get("publisher")
+        )
+        when = content.get("pubDate") or item.get("providerPublishTime")
+        if isinstance(when, (int, float)):
+            when = datetime.fromtimestamp(when, tz=timezone.utc).strftime("%Y-%m-%d")
+        elif isinstance(when, str):
+            when = when[:10]
+        out.append({"title": title, "publisher": publisher or "", "time": when or ""})
+        if len(out) >= limit:
+            break
+    return out
+
+
+def get_digest_data(tickers: list[str], news_limit: int) -> dict[str, dict]:
+    """Next earnings date + recent headlines per ticker. Resilient to per-ticker failure."""
+    yf = _import_yfinance()
+    digest: dict[str, dict] = {}
+    for ticker in tickers:
+        entry = {"earnings_date": None, "news": []}
+        try:
+            tk = yf.Ticker(ticker)
+            entry["earnings_date"] = _coerce_earnings_date(getattr(tk, "calendar", None))
+            entry["news"] = _normalize_news(getattr(tk, "news", None), news_limit)
+        except Exception as exc:  # noqa: BLE001
+            print(f"warning: could not fetch digest for {ticker}: {exc}", file=sys.stderr)
+        digest[ticker] = entry
+    return digest
+
+
+def resolve_digest_data(args, portfolio, news_limit: int) -> dict[str, dict]:
+    if args.fixture:
+        return load_json(args.fixture).get("digest", {})
+    tickers = [h["ticker"] for h in portfolio["holdings"]]
+    return get_digest_data(tickers, news_limit)
+
+
 # --------------------------------------------------------------------------- #
 # Build positions
 # --------------------------------------------------------------------------- #
@@ -203,6 +268,7 @@ def build_positions(portfolio: dict, quotes: dict[str, dict]) -> list[Position]:
                 price=q["price"],
                 prev_close=q["prev_close"],
                 currency=q["currency"],
+                target_weight=float(h.get("target_weight", 0.0)),
             )
         )
     if not positions:
@@ -431,6 +497,98 @@ def _save_state(state: dict) -> None:
         print(f"warning: could not write state file: {exc}", file=sys.stderr)
 
 
+def cmd_digest(args) -> int:
+    portfolio = load_portfolio(args.portfolio)
+    news_limit = args.news
+    digest = resolve_digest_data(args, portfolio, news_limit)
+
+    header(f"NEWS & EARNINGS DIGEST   {datetime.now(timezone.utc):%Y-%m-%d %H:%M UTC}")
+    by_ticker = {h["ticker"]: h for h in portfolio["holdings"]}
+    today = datetime.now(timezone.utc).date()
+
+    for ticker, h in by_ticker.items():
+        d = digest.get(ticker, {})
+        name = h.get("name", ticker)
+        earn = d.get("earnings_date")
+        when = ""
+        if earn:
+            try:
+                days = (datetime.strptime(earn, "%Y-%m-%d").date() - today).days
+                when = _c(f"  (next earnings {earn}, in {days}d)", "33") if days >= 0 \
+                    else f"  (last earnings {earn})"
+            except ValueError:
+                when = f"  (earnings {earn})"
+        else:
+            when = _c("  (no earnings date)", "90")
+        print(f"\n{_c(ticker, '1;36')} — {name}{when}")
+        news = d.get("news", [])
+        if not news:
+            print("    · no recent headlines")
+        for n in news[:news_limit]:
+            meta = " · ".join(x for x in (n.get("time"), n.get("publisher")) if x)
+            meta = f"  [{meta}]" if meta else ""
+            print(f"    · {n['title']}{meta}")
+    print()
+    return 0
+
+
+def cmd_rebalance(args) -> int:
+    portfolio = load_portfolio(args.portfolio)
+    cfg = load_json(args.config).get("rebalance", {})
+    band = args.band if args.band is not None else cfg.get("drift_band_pct", 5)
+    quotes, fx = resolve_market_data(args, portfolio)
+    positions = build_positions(portfolio, quotes)
+
+    total_mv_usd = sum(p.market_value_usd for p in positions)
+
+    # Targets: explicit per-holding target_weight, or equal-weight with --equal.
+    if args.equal:
+        eq = 100.0 / len(positions)
+        targets = {p.ticker: eq for p in positions}
+    else:
+        targets = {p.ticker: p.target_weight for p in positions}
+        total_target = sum(targets.values())
+        if total_target <= 0:
+            sys.exit("error: no target weights set. Add 'target_weight' to holdings "
+                     "in portfolio.json, or run with --equal.")
+        if abs(total_target - 100) > 0.5:
+            print(f"note: target weights sum to {total_target:.1f}%, normalizing to 100%.",
+                  file=sys.stderr)
+            targets = {t: w / total_target * 100 for t, w in targets.items()}
+
+    header(f"REBALANCE — drift vs target  (band ±{band:.0f}%, suggestions only)")
+    cols = f"{'Ticker':<6}{'Current':>9}{'Target':>9}{'Drift':>9}{'Action':>9}{'≈ Shares':>10}{'≈ ILS':>14}"
+    print(cols)
+    print("-" * len(cols))
+
+    suggestions = 0
+    for p in sorted(positions, key=lambda x: x.market_value_usd, reverse=True):
+        cur = p.market_value_usd / total_mv_usd * 100 if total_mv_usd else 0
+        tgt = targets.get(p.ticker, 0)
+        drift = cur - tgt
+        target_value_usd = tgt / 100 * total_mv_usd
+        delta_usd = target_value_usd - p.market_value_usd  # +add / -trim
+        delta_shares = delta_usd / p.price if p.price else 0
+        if abs(drift) <= band:
+            action, sh, ils = "hold", "", ""
+        else:
+            suggestions += 1
+            action = _c("ADD", "32") if delta_usd > 0 else _c("TRIM", "31")
+            sh = f"{delta_shares:+.1f}"
+            ils = fmt_ils(delta_usd * fx)
+        print(f"{p.ticker:<6}{cur:>8.1f}%{tgt:>8.1f}%{drift:>+8.1f}%"
+              f"{action:>{9 + (9 if COLOR and action not in ('hold',) else 0)}}"
+              f"{sh:>10}{ils:>14}")
+
+    print("-" * len(cols))
+    if suggestions:
+        print(f"\n{_c(str(suggestions) + ' position(s) outside the ±' + format(band, '.0f') + '% band.', '1;33')}")
+    else:
+        print(f"\n{_c('All positions within the rebalance band.', '1;32')}")
+    print(_c("Suggestions only — this tool never places trades.", "90"))
+    return 0
+
+
 # --------------------------------------------------------------------------- #
 # CLI
 # --------------------------------------------------------------------------- #
@@ -449,12 +607,25 @@ def build_parser() -> argparse.ArgumentParser:
     alerts = sub.add_parser("alerts", help="print configured threshold/level triggers (for cron)")
     alerts.add_argument("--quiet", action="store_true",
                         help="print nothing when no alerts fire (ideal for cron + MAILTO)")
+    digest = sub.add_parser("digest", help="next earnings date + recent headlines per holding")
+    digest.add_argument("--news", type=int, default=3, help="headlines per holding (default 3)")
+    rebal = sub.add_parser("rebalance", help="drift vs target weights with suggested trims/adds")
+    rebal.add_argument("--equal", action="store_true",
+                       help="target equal weight across holdings instead of portfolio.json targets")
+    rebal.add_argument("--band", type=float, default=None,
+                       help="only suggest when drift exceeds this %% (default from config.json)")
     return parser
 
 
 def main(argv=None) -> int:
     args = build_parser().parse_args(argv)
-    dispatch = {"status": cmd_status, "risk": cmd_risk, "alerts": cmd_alerts}
+    dispatch = {
+        "status": cmd_status,
+        "risk": cmd_risk,
+        "alerts": cmd_alerts,
+        "digest": cmd_digest,
+        "rebalance": cmd_rebalance,
+    }
     return dispatch[args.command](args)
 
 

@@ -8,11 +8,13 @@ explicitly, and reports **status**, **risk**, and **alerts**.
 
 ## What it does
 
-| Command  | Output |
-|----------|--------|
-| `status` | Each position: current price, daily change, market value (ILS), portfolio weight, and unrealized P/L (% and ₪). Plus a portfolio total. |
-| `risk`   | Flags: any single position over 15% of the book; sector **and** theme concentration over your limits; any position down more than 10% from cost. |
-| `alerts` | Cron-friendly. Prints daily moves past your threshold and price-level **crossings**. Remembers prices between runs so a level alert fires once, not every run. |
+| Command     | Output |
+|-------------|--------|
+| `status`    | Each position: current price, daily change, market value (ILS), portfolio weight, and unrealized P/L (% and ₪). Plus a portfolio total. |
+| `risk`      | Flags: any single position over 15% of the book; sector **and** theme concentration over your limits; any position down more than 10% from cost. |
+| `alerts`    | Cron-friendly. Prints daily moves past your threshold and price-level **crossings**. Remembers prices between runs so a level alert fires once, not every run. |
+| `digest`    | Per holding: next earnings date (with countdown) and the most recent headlines. |
+| `rebalance` | Drift of each position vs its target weight, with suggested trims/adds in shares and ₪. **Suggestion-only — never trades.** |
 
 ## Setup
 
@@ -33,6 +35,11 @@ python3 portfolio_agent.py status
 python3 portfolio_agent.py risk
 python3 portfolio_agent.py alerts            # prints "No alerts triggered." when calm
 python3 portfolio_agent.py alerts --quiet    # prints nothing when calm (for cron)
+python3 portfolio_agent.py digest            # earnings + headlines per holding
+python3 portfolio_agent.py digest --news 5   # show 5 headlines per holding
+python3 portfolio_agent.py rebalance         # drift vs target_weight in portfolio.json
+python3 portfolio_agent.py rebalance --equal # target equal weight instead
+python3 portfolio_agent.py rebalance --band 3  # only suggest when drift > 3%
 ```
 
 Run completely offline against a saved snapshot (no network):
@@ -54,6 +61,10 @@ You change holdings here; you never touch the code.
 - `avg_cost` — your average buy price **per share**, in `cost_currency`.
 - `sector` / `theme` — free-text labels used by the `risk` command to group
   positions. Change the grouping however you like.
+- `target_weight` — your desired % of the portfolio, used by `rebalance`. The
+  values shipped are **examples** (they trim the ASML/CRDO concentration the
+  `risk` command flags); edit them to your own plan. They should sum to ~100 —
+  if they don't, `rebalance` normalizes them and tells you.
 
 > **Note on your 9th holding.** Your broker shows **9 positions**; the 8 listed
 > here are the ones you provided. When you have the 9th line (it looked like
@@ -134,7 +145,7 @@ Tips:
 ## Files
 
 ```
-portfolio_agent.py   single module (status | risk | alerts)
+portfolio_agent.py   single module (status | risk | alerts | digest | rebalance)
 portfolio.json       your holdings (edit this)
 config.json          thresholds + price-level alerts
 requirements.txt     yfinance
@@ -142,8 +153,27 @@ fixtures/            offline snapshots for --fixture
 .alert_state.json    auto-created; last-seen prices for crossing detection
 ```
 
-## Possible next modules
+## News & earnings digest (`digest`)
 
-- **News / earnings digest** per holding (next earnings date, recent headlines).
-- **Rebalancing suggester** — set target weights and get suggested trims/adds
-  (still read-only — it would only *suggest*).
+For each holding, pulls the **next earnings date** (with a day countdown) and the
+most recent **headlines** from Yahoo. Earnings dates and news are best-effort:
+some tickers won't have a scheduled date, and the command degrades gracefully
+(`no earnings date` / `no recent headlines`) rather than failing. Use
+`--news N` to change how many headlines per holding (default 3). Not market-hours
+sensitive — handy to run each morning before the US open.
+
+## Rebalancing suggester (`rebalance`)
+
+Compares each position's **current weight** to its **`target_weight`** (from
+`portfolio.json`) and, for anything outside the drift band, suggests the
+approximate **trim/add in shares and ₪** to get back to target.
+
+- Default band comes from `config.json` → `rebalance.drift_band_pct` (5%);
+  override per run with `--band`.
+- `--equal` ignores your targets and aims for equal weight across holdings.
+- Targets that don't sum to 100% are normalized automatically (with a note).
+
+> **Suggestion-only.** Like every command here, `rebalance` reads data and prints
+> ideas. It does not connect to a broker and cannot place trades. The share/₪
+> figures are rounded estimates at the current price — your actual fills will
+> differ, and they ignore FX conversion costs, fees, and tax.

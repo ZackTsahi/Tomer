@@ -16,5 +16,9 @@
       { "ticker": "ASML", "direction": "above", "level": 1800, "note": "trim candidate" },
       { "ticker": "NBIS", "direction": "above", "level": 280, "note": "take-profit zone" }
     ]
+  },
+
+  "rebalance": {
+    "drift_band_pct": 5
   }
 }
