@@ -140,10 +140,12 @@ One-time setup (no account needed):
 1. Add the CallMeBot WhatsApp number **+34 644 51 95 23** to your contacts.
 2. Send it the message: **`I allow callmebot to send me messages`**.
 3. It replies with your personal **APIKEY**.
-4. Put your number in `config.json` (`phone`) and export the key:
+4. Put your number in `config.json` (`phone`) and export the key. The repo ships
+   a template — copy it and fill in:
 
 ```sh
-export CALLMEBOT_APIKEY=your_api_key_here
+cp .env.example .env     # then edit .env and paste your key
+. ./.env                 # load it into the current shell
 ```
 
 Test it:

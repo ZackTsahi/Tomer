@@ -11,5 +11,6 @@
     { "ticker": "NBIS", "name": "Nebius Group",               "shares": 16, "avg_cost": 153.08,  "cost_currency": "USD", "sector": "AI Infrastructure / Cloud", "theme": "Semis & AI Infra", "target_weight": 12 },
     { "ticker": "IREN", "name": "IREN Ltd",                   "shares": 63, "avg_cost": 55.88,   "cost_currency": "USD", "sector": "AI Infrastructure / Data Centers", "theme": "Semis & AI Infra", "target_weight": 11 },
     { "ticker": "AAOI", "name": "Applied Optoelectronics",    "shares": 19, "avg_cost": 166.21,  "cost_currency": "USD", "sector": "Semiconductors",            "theme": "Semis & AI Infra", "target_weight": 10 }
-  ]
+  ],
+  "_add_your_9th_holding_like_this": { "ticker": "XXXX", "name": "Your 9th position", "shares": 0, "avg_cost": 0, "cost_currency": "USD", "sector": "Cash / Other", "theme": "Other", "target_weight": 0 }
 }
