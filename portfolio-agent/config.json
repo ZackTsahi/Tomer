@@ -20,5 +20,15 @@
 
   "rebalance": {
     "drift_band_pct": 5
+  },
+
+  "notifications": {
+    "_comment": "Send triggered alerts to WhatsApp. Secrets (API key / tokens) go in environment variables, NEVER here. provider: 'callmebot' (free personal) or 'twilio'. Set enabled=true once your env vars are in place. Set dry_run=true to preview the request without sending.",
+    "whatsapp": {
+      "enabled": false,
+      "provider": "callmebot",
+      "phone": "+972500000000",
+      "dry_run": false
+    }
   }
 }

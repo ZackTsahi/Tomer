@@ -434,7 +434,15 @@ def _print_group_concentration(positions, total_mv, key, limit, fx) -> int:
 
 def cmd_alerts(args) -> int:
     portfolio = load_portfolio(args.portfolio)
-    config = load_json(args.config).get("alerts", {})
+    full_config = load_json(args.config)
+    config = full_config.get("alerts", {})
+    wa_cfg = full_config.get("notifications", {}).get("whatsapp", {})
+
+    # --test-notify: send a canned WhatsApp message and exit (verifies wiring).
+    if getattr(args, "test_notify", False):
+        ok = send_whatsapp("✅ Portfolio agent test message — WhatsApp alerts are wired up.", wa_cfg)
+        return 0 if ok else 1
+
     quotes, fx = resolve_market_data(args, portfolio)
     positions = build_positions(portfolio, quotes)
     by_ticker = {p.ticker: p for p in positions}
@@ -483,6 +491,12 @@ def cmd_alerts(args) -> int:
         print(f"ALERTS @ {stamp}  (USD/ILS {fx:.3f})")
         for line in triggered:
             print(f"  {line}")
+
+        # WhatsApp delivery: on if config enables it, unless --no-notify; --notify forces.
+        should_notify = args.notify or (wa_cfg.get("enabled") and not args.no_notify)
+        if should_notify:
+            msg = f"📊 Portfolio alerts @ {stamp}\n" + "\n".join(triggered)
+            send_whatsapp(msg, wa_cfg)
         return 1  # non-zero so cron wrappers / pipelines can detect "something fired"
     if not args.quiet:
         print("No alerts triggered.")
@@ -495,6 +509,93 @@ def _save_state(state: dict) -> None:
             json.dump(state, fh, indent=2)
     except OSError as exc:
         print(f"warning: could not write state file: {exc}", file=sys.stderr)
+
+
+# --------------------------------------------------------------------------- #
+# WhatsApp notifications
+# --------------------------------------------------------------------------- #
+# Secrets (API keys / tokens) come from environment variables, never config.json,
+# so nothing sensitive is committed. config.json holds only routing (provider +
+# your phone number). A notification failure is logged but never crashes the run
+# or suppresses the printed alerts.
+def send_whatsapp(message: str, cfg: dict) -> bool:
+    provider = (cfg.get("provider") or "callmebot").lower()
+    dry_run = bool(cfg.get("dry_run")) or os.environ.get("WHATSAPP_DRY_RUN") == "1"
+    try:
+        if provider == "callmebot":
+            return _send_callmebot(message, cfg, dry_run)
+        if provider == "twilio":
+            return _send_twilio(message, cfg, dry_run)
+        if provider == "console":
+            print("[whatsapp→console]\n" + message)
+            return True
+        print(f"warning: unknown WhatsApp provider '{provider}'", file=sys.stderr)
+        return False
+    except Exception as exc:  # noqa: BLE001 - delivery must never break the alert run
+        print(f"warning: WhatsApp send failed ({provider}): {exc}", file=sys.stderr)
+        return False
+
+
+def _require_requests():
+    try:
+        import requests  # noqa: WPS433
+        return requests
+    except ImportError:
+        print("warning: 'requests' not installed; cannot send WhatsApp "
+              "(pip install requests)", file=sys.stderr)
+        return None
+
+
+def _send_callmebot(message: str, cfg: dict, dry_run: bool) -> bool:
+    """Free personal WhatsApp via CallMeBot. One-time setup: message their number
+    to receive your APIKEY, then export CALLMEBOT_APIKEY. See README."""
+    phone = cfg.get("phone")
+    apikey = os.environ.get("CALLMEBOT_APIKEY")
+    if not phone or not apikey:
+        print("warning: CallMeBot needs notifications.whatsapp.phone in config.json "
+              "and CALLMEBOT_APIKEY in the environment", file=sys.stderr)
+        return False
+    url = "https://api.callmebot.com/whatsapp.php"
+    params = {"phone": phone, "text": message, "apikey": apikey}
+    if dry_run:
+        print(f"[dry-run] GET {url}  phone={phone} apikey=***  text={message!r}")
+        return True
+    requests = _require_requests()
+    if not requests:
+        return False
+    resp = requests.get(url, params=params, timeout=20)
+    ok = resp.status_code == 200
+    if not ok:
+        print(f"warning: CallMeBot HTTP {resp.status_code}: {resp.text[:200]}", file=sys.stderr)
+    return ok
+
+
+def _send_twilio(message: str, cfg: dict, dry_run: bool) -> bool:
+    """Twilio WhatsApp. Needs TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_FROM
+    (e.g. 'whatsapp:+14155238886'); recipient is config phone or TWILIO_TO."""
+    sid = os.environ.get("TWILIO_ACCOUNT_SID")
+    token = os.environ.get("TWILIO_AUTH_TOKEN")
+    sender = os.environ.get("TWILIO_FROM")
+    to = cfg.get("phone") or os.environ.get("TWILIO_TO")
+    if not all([sid, token, sender, to]):
+        print("warning: Twilio needs TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, "
+              "TWILIO_FROM env vars and a recipient phone", file=sys.stderr)
+        return False
+    to_wa = to if to.startswith("whatsapp:") else f"whatsapp:{to}"
+    from_wa = sender if sender.startswith("whatsapp:") else f"whatsapp:{sender}"
+    url = f"https://api.twilio.com/2010-04-01/Accounts/{sid}/Messages.json"
+    data = {"From": from_wa, "To": to_wa, "Body": message}
+    if dry_run:
+        print(f"[dry-run] POST {url}  From={from_wa} To={to_wa}  Body={message!r}")
+        return True
+    requests = _require_requests()
+    if not requests:
+        return False
+    resp = requests.post(url, data=data, auth=(sid, token), timeout=20)
+    ok = resp.status_code in (200, 201)
+    if not ok:
+        print(f"warning: Twilio HTTP {resp.status_code}: {resp.text[:200]}", file=sys.stderr)
+    return ok
 
 
 def cmd_digest(args) -> int:
@@ -607,6 +708,12 @@ def build_parser() -> argparse.ArgumentParser:
     alerts = sub.add_parser("alerts", help="print configured threshold/level triggers (for cron)")
     alerts.add_argument("--quiet", action="store_true",
                         help="print nothing when no alerts fire (ideal for cron + MAILTO)")
+    alerts.add_argument("--notify", action="store_true",
+                        help="force-send triggered alerts to WhatsApp (overrides config)")
+    alerts.add_argument("--no-notify", action="store_true",
+                        help="never send WhatsApp, even if enabled in config")
+    alerts.add_argument("--test-notify", action="store_true",
+                        help="send a test WhatsApp message and exit (verifies setup)")
     digest = sub.add_parser("digest", help="next earnings date + recent headlines per holding")
     digest.add_argument("--news", type=int, default=3, help="headlines per holding (default 3)")
     rebal = sub.add_parser("rebalance", help="drift vs target weights with suggested trims/adds")

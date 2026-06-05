@@ -35,6 +35,8 @@ python3 portfolio_agent.py status
 python3 portfolio_agent.py risk
 python3 portfolio_agent.py alerts            # prints "No alerts triggered." when calm
 python3 portfolio_agent.py alerts --quiet    # prints nothing when calm (for cron)
+python3 portfolio_agent.py alerts --test-notify  # send a WhatsApp test message
+python3 portfolio_agent.py alerts --notify   # force-send triggers to WhatsApp
 python3 portfolio_agent.py digest            # earnings + headlines per holding
 python3 portfolio_agent.py digest --news 5   # show 5 headlines per holding
 python3 portfolio_agent.py rebalance         # drift vs target_weight in portfolio.json
@@ -111,6 +113,70 @@ This is the part that quietly breaks naive trackers, so it is deliberate:
   P/L % match your broker exactly even though the absolute ₪ totals differ: your
   broker uses its own display rate and includes the 9th holding.)
 
+## WhatsApp alerts
+
+The `alerts` command can push triggers to **WhatsApp** so you get them on your
+phone, not just in a terminal or email. Two providers are supported. **Secrets
+(API key / tokens) live in environment variables — never in `config.json`** — so
+nothing sensitive is committed.
+
+Routing goes in `config.json`:
+
+```json
+"notifications": {
+  "whatsapp": {
+    "enabled": false,        // flip to true once your env vars are set
+    "provider": "callmebot", // or "twilio"
+    "phone": "+972500000000",// YOUR number, international format
+    "dry_run": false         // true = print the request instead of sending
+  }
+}
+```
+
+### Option A — CallMeBot (free, easiest, personal use)
+
+One-time setup (no account needed):
+
+1. Add the CallMeBot WhatsApp number **+34 644 51 95 23** to your contacts.
+2. Send it the message: **`I allow callmebot to send me messages`**.
+3. It replies with your personal **APIKEY**.
+4. Put your number in `config.json` (`phone`) and export the key:
+
+```sh
+export CALLMEBOT_APIKEY=your_api_key_here
+```
+
+Test it:
+
+```sh
+python3 portfolio_agent.py alerts --test-notify
+```
+
+You should get a WhatsApp message within a few seconds. Then set
+`"enabled": true` and triggered alerts will be delivered automatically.
+
+### Option B — Twilio (robust, for heavier use)
+
+Use the [Twilio WhatsApp sandbox](https://www.twilio.com/docs/whatsapp/sandbox)
+or an approved sender, set `"provider": "twilio"`, and export:
+
+```sh
+export TWILIO_ACCOUNT_SID=ACxxxxxxxx
+export TWILIO_AUTH_TOKEN=your_token
+export TWILIO_FROM="+14155238886"     # your Twilio WhatsApp sender
+# recipient comes from config.json "phone" (or export TWILIO_TO)
+```
+
+### Flags & behavior
+
+- With `enabled: true`, **triggered** alerts auto-send (nothing is sent when calm).
+- `--notify` forces a send even if `enabled` is false; `--no-notify` blocks sending.
+- `--test-notify` sends one canned message and exits — use it to verify setup.
+- `dry_run: true` (or `WHATSAPP_DRY_RUN=1`) prints the exact request instead of
+  sending — handy for testing without spending a message.
+- A delivery failure logs a warning but never crashes the run or hides the
+  printed alerts.
+
 ## Scheduling with cron
 
 `alerts --quiet` prints nothing when nothing fires, so with cron's `MAILTO` you
@@ -138,6 +204,13 @@ MAILTO=tsahi.cohen@gmail.com
 Tips:
 - If you used a virtualenv, point cron at `.venv/bin/python3`.
 - To log instead of email: append `>> agent.log 2>&1`.
+- **WhatsApp from cron:** cron runs with a bare environment, so your secret
+  isn't there automatically. Either set it at the top of the crontab
+  (`CALLMEBOT_APIKEY=...`) or source a file in the command, e.g.
+  `* * * * * . /path/to/.env && cd /path/to/portfolio-agent && .venv/bin/python3 portfolio_agent.py alerts --quiet`.
+  Keep that `.env` out of git (the repo's `.gitignore` already excludes `.env`).
+  With WhatsApp `enabled: true`, `alerts --quiet` stays silent in the terminal
+  but still pushes triggers to your phone.
 - The agent writes `.alert_state.json` next to the script to remember prices
   between runs (so level alerts fire on the crossing, not repeatedly). It's safe
   to delete; the next run recreates it.
