@@ -1,0 +1,6 @@
+# Read-only portfolio monitoring agent — dependencies
+# yfinance pulls quotes from Yahoo Finance (free, no API key) and brings its own
+# requests/pandas dependencies along with it.
+yfinance>=0.2.40
+# requests is used to send WhatsApp alerts (and is already a yfinance dependency).
+requests>=2.31

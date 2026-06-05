@@ -1,0 +1,10 @@
+# Runtime state — last-seen prices for alert crossing detection (auto-created)
+.alert_state.json
+
+# Local virtualenv
+.venv/
+__pycache__/
+*.pyc
+
+# Optional log output from cron
+agent.log

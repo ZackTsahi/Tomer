@@ -1,0 +1,57 @@
+name: Portfolio alerts (WhatsApp)
+
+# Runs the read-only alerts check in the cloud and sends triggers to WhatsApp.
+# No terminal needed: it runs on a schedule, and you can also start it by hand
+# from the Actions tab -> "Portfolio alerts (WhatsApp)" -> "Run workflow".
+
+on:
+  schedule:
+    # Every 15 minutes during US market hours (13:30-20:00 UTC ≈ 09:30-16:00 ET),
+    # Monday-Friday. GitHub cron is always UTC. Times drift ~1h with US DST.
+    - cron: "*/15 13-20 * * 1-5"
+  workflow_dispatch:        # the "Run workflow" button in the Actions tab
+
+# Avoid overlapping runs piling up.
+concurrency:
+  group: portfolio-alerts
+  cancel-in-progress: false
+
+jobs:
+  alerts:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: portfolio-agent
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      # Restore the last-seen prices so level-crossing alerts fire once, not every
+      # run. The cache key rotates each run; restore-keys grabs the most recent.
+      - name: Restore alert state
+        uses: actions/cache@v4
+        with:
+          path: portfolio-agent/.alert_state.json
+          key: alert-state-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            alert-state-
+
+      - name: Run alerts and notify WhatsApp
+        env:
+          CALLMEBOT_APIKEY: ${{ secrets.CALLMEBOT_APIKEY }}
+          WHATSAPP_PHONE: ${{ secrets.WHATSAPP_PHONE }}
+          # Twilio (only if you switch provider to "twilio" in config.json):
+          TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+          TWILIO_FROM: ${{ secrets.TWILIO_FROM }}
+        run: |
+          # --notify forces WhatsApp delivery regardless of the config "enabled" flag.
+          # Exit code 1 just means "something triggered" — not a failure — so don't
+          # let it fail the job.
+          python portfolio_agent.py alerts --notify | tee "$GITHUB_STEP_SUMMARY" || true
