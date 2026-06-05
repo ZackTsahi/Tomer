@@ -549,7 +549,7 @@ def _require_requests():
 def _send_callmebot(message: str, cfg: dict, dry_run: bool) -> bool:
     """Free personal WhatsApp via CallMeBot. One-time setup: message their number
     to receive your APIKEY, then export CALLMEBOT_APIKEY. See README."""
-    phone = cfg.get("phone")
+    phone = os.environ.get("WHATSAPP_PHONE") or cfg.get("phone")
     apikey = os.environ.get("CALLMEBOT_APIKEY")
     if not phone or not apikey:
         print("warning: CallMeBot needs notifications.whatsapp.phone in config.json "
@@ -576,7 +576,7 @@ def _send_twilio(message: str, cfg: dict, dry_run: bool) -> bool:
     sid = os.environ.get("TWILIO_ACCOUNT_SID")
     token = os.environ.get("TWILIO_AUTH_TOKEN")
     sender = os.environ.get("TWILIO_FROM")
-    to = cfg.get("phone") or os.environ.get("TWILIO_TO")
+    to = os.environ.get("TWILIO_TO") or os.environ.get("WHATSAPP_PHONE") or cfg.get("phone")
     if not all([sid, token, sender, to]):
         print("warning: Twilio needs TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, "
               "TWILIO_FROM env vars and a recipient phone", file=sys.stderr)

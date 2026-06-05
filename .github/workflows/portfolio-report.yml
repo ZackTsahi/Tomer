@@ -1,0 +1,51 @@
+name: Portfolio report
+
+# Read-only snapshot you can run from the GitHub website or mobile app — no
+# terminal. Actions tab -> "Portfolio report" -> "Run workflow" -> pick a command.
+# The result is written to the run Summary, which is easy to read on your phone.
+
+on:
+  workflow_dispatch:
+    inputs:
+      command:
+        description: "What to show"
+        type: choice
+        default: status
+        options: [status, risk, digest, rebalance]
+  schedule:
+    # Daily status + risk snapshot at 20:30 UTC (~just after the US close).
+    - cron: "30 20 * * 1-5"
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: portfolio-agent
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Build report
+        run: |
+          # Manual run uses the chosen command; the scheduled run shows status+risk.
+          CMD="${{ github.event.inputs.command }}"
+          {
+            echo "## 📊 Portfolio report — $(date -u '+%Y-%m-%d %H:%M UTC')"
+            echo ""
+            echo '```'
+            if [ -z "$CMD" ]; then
+              python portfolio_agent.py status
+              echo ""
+              python portfolio_agent.py risk
+            else
+              python portfolio_agent.py "$CMD"
+            fi
+            echo '```'
+          } | tee "$GITHUB_STEP_SUMMARY"

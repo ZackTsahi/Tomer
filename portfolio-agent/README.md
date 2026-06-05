@@ -16,7 +16,33 @@ explicitly, and reports **status**, **risk**, and **alerts**.
 | `digest`    | Per holding: next earnings date (with countdown) and the most recent headlines. |
 | `rebalance` | Drift of each position vs its target weight, with suggested trims/adds in shares and ₪. **Suggestion-only — never trades.** |
 
-## Setup
+## Run it without a terminal (GitHub Actions)
+
+You can run everything **from the GitHub website / mobile app** — no command line.
+Two workflows are included (in `.github/workflows/`):
+
+| Workflow | What it does |
+|----------|--------------|
+| **Portfolio alerts (WhatsApp)** | Runs `alerts` every 15 min during US market hours and sends any triggers to your WhatsApp. |
+| **Portfolio report** | Daily `status`+`risk` snapshot, and a **Run workflow** button to show `status` / `risk` / `digest` / `rebalance` on demand. Output appears in the run **Summary** (reads well on the GitHub mobile app). |
+
+**One-time setup (all in the browser):**
+
+1. **Merge this branch to `main`.** Scheduled GitHub Actions only run from the
+   default branch, so the workflows must be on `main` to fire on a schedule.
+2. Add your secrets: repo **Settings → Secrets and variables → Actions → New
+   repository secret**:
+   - `CALLMEBOT_APIKEY` — your CallMeBot key (see *WhatsApp alerts* below).
+   - `WHATSAPP_PHONE` — your number, e.g. `+972541234567` (kept out of the repo).
+3. Done. Alerts arrive on WhatsApp automatically. To run something by hand:
+   **Actions** tab → pick the workflow → **Run workflow**.
+
+Editing your holdings/thresholds is also browser-only: open `portfolio.json` or
+`config.json` on GitHub and click the ✏️ pencil to edit and commit.
+
+> Prefer your own machine instead? The terminal setup is below.
+
+## Setup (run locally)
 
 Requires Python 3.9+.
 
